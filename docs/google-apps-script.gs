@@ -32,6 +32,9 @@ const CONFIG = {
   /** Si es true, el correo al prospecto llega también (CCO) al administrador.
    *  Sirve para verificar que el mensaje al lead realmente se envió. */
   COPIA_OCULTA_LEAD: true,
+  /** El aviso interno se envía solo en texto plano: Gmail lo marca menos
+   *  como spam que un correo HTML con botones y enlaces. */
+  ADMIN_SIN_HTML: true,
   RESPONDER_A: "ventas@tudominio.mx",
 
   DISTRIBUIDOR: "Distribuidor autorizado Chevrolet",
@@ -520,14 +523,15 @@ function enviarCorreoAdmin_(lead) {
     (lead.mensaje ? "Mensaje: " + lead.mensaje + "\n" : "") +
     "\nHoja de leads: " + libro_().getUrl() + "\n";
 
-  enviarConRespaldo_({
+  const opcionesAdmin = {
     to: destinatariosAdmin_(),
     subject: "Nuevo lead · " + lead.nombre + " · " + (lead.ciudad || "CDMX"),
-    body: texto,
-    htmlBody: html,
+    body: texto + "\n--\nVer en la hoja: " + url + "\n",
     name: CONFIG.REMITENTE_NOMBRE,
     replyTo: lead.correo || responderA_(),
-  });
+  };
+  if (!CONFIG.ADMIN_SIN_HTML) opcionesAdmin.htmlBody = html;
+  enviarConRespaldo_(opcionesAdmin);
 }
 
 /* ============================================================= instalación */
