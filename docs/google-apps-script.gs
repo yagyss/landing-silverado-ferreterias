@@ -152,6 +152,20 @@ function fechaLegible_(fecha) {
   return Utilities.formatDate(fecha, "America/Mexico_City", "dd/MM/yyyy HH:mm");
 }
 
+function registrarError_(donde, error, detalle) {
+  try {
+    const libro = libro_();
+    let hoja = libro.getSheetByName("Errores");
+    if (!hoja) {
+      hoja = libro.insertSheet("Errores");
+      hoja.appendRow(["Fecha", "Dónde", "Mensaje", "Detalle"]).setFontWeight("bold");
+    }
+    hoja.appendRow([new Date(), donde, String(error), String(detalle || "").slice(0, 500)]);
+  } catch (e) {
+    console.error("No se pudo registrar el error: " + e);
+  }
+}
+
 /* ============================================================== recepción */
 
 function doPost(evento) {
@@ -274,6 +288,7 @@ function doPost(evento) {
     });
   } catch (fallo) {
     console.error(fallo);
+    registrarError_("doPost", fallo, "");
     return respuesta_({
       ok: false,
       codigo: "servidor",
