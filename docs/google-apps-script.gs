@@ -148,6 +148,29 @@ function folio_() {
   return "SV-" + fecha + "-" + Math.random().toString(36).slice(2, 6).toUpperCase();
 }
 
+/**
+ * Correo que recibe los avisos. Si CONFIG.ADMIN_EMAIL sigue con el valor de
+ * ejemplo (o está vacío), usa el correo de la cuenta dueña de la hoja, para
+ * que las notificaciones nunca se pierdan en un dominio inexistente.
+ */
+function correoAdmin_() {
+  const configurado = String(CONFIG.ADMIN_EMAIL || "").trim();
+  const invalido =
+    !configurado ||
+    configurado.indexOf("@") < 1 ||
+    /tudominio\.mx/i.test(configurado) ||
+    /ejemplo|example/i.test(configurado);
+
+  if (invalido) {
+    try {
+      return Session.getEffectiveUser().getEmail() || configurado;
+    } catch (e) {
+      return configurado;
+    }
+  }
+  return configurado;
+}
+
 function fechaLegible_(fecha) {
   return Utilities.formatDate(fecha, "America/Mexico_City", "dd/MM/yyyy HH:mm");
 }
@@ -296,11 +319,11 @@ function doPost(evento) {
     }
 
     // Aviso explícito si el correo del administrador sigue sin configurar
-    if (String(CONFIG.ADMIN_EMAIL).indexOf("tudominio") >= 0) {
+    if (String(CONFIG.ADMIN_EMAIL).indexOf("tudominio") >= 0 || !CONFIG.ADMIN_EMAIL) {
       registrarError_(
         "configuracion",
         "ADMIN_EMAIL no configurado",
-        "Cambia CONFIG.ADMIN_EMAIL por un correo real; los avisos no llegarán."
+        "ADMIN_EMAIL sin configurar: los avisos se envían a " + correoAdmin_()
       );
     }
 
@@ -415,7 +438,7 @@ function enviarCorreoAdmin_(lead) {
     "</div></div></div>";
 
   MailApp.sendEmail({
-    to: CONFIG.ADMIN_EMAIL,
+    to: correoAdmin_(),
     subject: "Nuevo lead · " + lead.nombre + " · " + (lead.ciudad || "CDMX"),
     htmlBody: html,
     name: CONFIG.REMITENTE_NOMBRE,
@@ -484,16 +507,20 @@ function verificar() {
  */
 function probarCorreos() {
   const avisos = [];
-  avisos.push("Destinatario administrador: " + CONFIG.ADMIN_EMAIL);
+  avisos.push("Destinatario administrador: " + correoAdmin_());
   avisos.push("Cuota diaria restante: " + MailApp.getRemainingDailyQuota() + " correos");
 
-  if (String(CONFIG.ADMIN_EMAIL).indexOf("tudominio") >= 0) {
-    avisos.push("⚠ ADMIN_EMAIL sigue con el valor de ejemplo. Cámbialo antes de probar.");
+  if (String(CONFIG.ADMIN_EMAIL).indexOf("tudominio") >= 0 || !CONFIG.ADMIN_EMAIL) {
+    avisos.push(
+      "⚠ ADMIN_EMAIL sigue con el valor de ejemplo: los avisos se enviarán a " +
+        correoAdmin_() +
+        "."
+    );
   }
 
   try {
     MailApp.sendEmail({
-      to: CONFIG.ADMIN_EMAIL,
+      to: correoAdmin_(),
       subject: "Prueba de correo · landing Silverado",
       htmlBody:
         '<div style="font-family:Arial;padding:20px"><h2>Correo de prueba</h2>' +
