@@ -1365,6 +1365,24 @@ a.wa-float {
   color: inherit;
 }
 
+
+/* En pantallas angostas el formulario queda debajo: la flecha apunta hacia abajo */
+@media (max-width: 979px) {
+  .cotiza__alt-flecha {
+    display: flex;
+    margin: 0.5rem 0 0;
+    transform: rotate(90deg);
+    transform-origin: left center;
+    animation: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cotiza__alt-flecha {
+    animation: none;
+  }
+}
+
 /* Flecha que señala el formulario */
 .cotiza__alt-flecha {
   display: inline-flex;
@@ -1380,6 +1398,11 @@ a.wa-float {
   height: 15px;
 }
 
+/* La versión vertical solo aparece en pantallas angostas */
+.cotiza__alt-flecha--abajo {
+  display: none;
+}
+
 @keyframes flecha-guia {
   0%,
   100% {
@@ -1390,19 +1413,38 @@ a.wa-float {
   }
 }
 
-/* En pantallas angostas el formulario queda debajo: la flecha apunta hacia abajo */
+@keyframes flecha-guia-abajo {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+/* En móvil el formulario queda debajo: flecha vertical centrada, fuera del texto */
 @media (max-width: 979px) {
   .cotiza__alt-flecha {
+    display: none;
+  }
+
+  .cotiza__alt-flecha--abajo {
     display: flex;
-    margin: 0.5rem 0 0;
-    transform: rotate(90deg);
-    transform-origin: left center;
-    animation: none;
+    justify-content: center;
+    margin: 0.5rem 0 0.1rem;
+    animation: flecha-guia-abajo 1500ms var(--ease-out) infinite;
+  }
+
+  .cotiza__alt-flecha--abajo svg {
+    width: 17px;
+    height: 34px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .cotiza__alt-flecha {
+  .cotiza__alt-flecha,
+  .cotiza__alt-flecha--abajo {
     animation: none;
   }
 }
