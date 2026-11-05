@@ -7301,6 +7301,12 @@ a[href="#cotizacion"].localnav__cta {
   color: var(--text-soft, #7c8798);
 }
 
+/* El botón flotante es un enlace real (abre WhatsApp en otra pestaña) */
+a.wa-float {
+  text-decoration: none;
+  color: inherit;
+}
+
   </style>
   </head>
   <body>
@@ -8533,7 +8539,7 @@ a[href="#cotizacion"].localnav__cta {
   </div>
 </footer>
 
-<button class="wa-float" type="button" data-wa-float aria-label="Cotizar por WhatsApp">
+<a class="wa-float" data-wa-float href="#cotizacion" aria-label="Solicitar cotización por WhatsApp" rel="noopener">
   <span class="wa-float__icon" aria-hidden="true">
     <svg viewBox="0 0 24 24" fill="currentColor">
       <path
@@ -8541,9 +8547,9 @@ a[href="#cotizacion"].localnav__cta {
       />
     </svg>
   </span>
-  <span class="wa-float__label">Cotiza por WhatsApp</span>
+  <span class="wa-float__label">Solicitar cotización</span>
   <span class="wa-float__badge" data-wa-badge hidden>Configura tu número en site.js</span>
-</button>
+</a>
 
 <dialog class="aviso" id="aviso-privacidad" data-aviso aria-labelledby="aviso-titulo">
   <div class="aviso__panel">
@@ -9909,6 +9915,14 @@ function initWhatsApp() {
       nodo.setAttribute("href", url);
       nodo.setAttribute("target", "_blank");
       nodo.setAttribute("rel", "noopener");
+
+      // Respaldo: si el marcado usara un <button>, igual abre WhatsApp.
+      if (nodo.tagName === "BUTTON") {
+        nodo.addEventListener("click", (evento) => {
+          evento.preventDefault();
+          window.open(url, "_blank", "noopener");
+        });
+      }
       return;
     }
     nodo.classList.add("is-sin-configurar");

@@ -1358,3 +1358,9 @@ a[href="#cotizacion"].localnav__cta {
   font-size: 0.86rem;
   color: var(--text-soft, #7c8798);
 }
+
+/* El botón flotante es un enlace real (abre WhatsApp en otra pestaña) */
+a.wa-float {
+  text-decoration: none;
+  color: inherit;
+}

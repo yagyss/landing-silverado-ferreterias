@@ -137,6 +137,14 @@ export function initWhatsApp() {
       nodo.setAttribute("href", url);
       nodo.setAttribute("target", "_blank");
       nodo.setAttribute("rel", "noopener");
+
+      // Respaldo: si el marcado usara un <button>, igual abre WhatsApp.
+      if (nodo.tagName === "BUTTON") {
+        nodo.addEventListener("click", (evento) => {
+          evento.preventDefault();
+          window.open(url, "_blank", "noopener");
+        });
+      }
       return;
     }
     nodo.classList.add("is-sin-configurar");
