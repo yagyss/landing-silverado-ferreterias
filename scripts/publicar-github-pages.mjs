@@ -14,7 +14,10 @@ const cabeceras = {
 };
 
 const api = async (ruta, opciones = {}) => {
-  const r = await fetch(`https://api.github.com${ruta}`, { headers: cabeceras, ...opciones });
+  const r = await fetch(`https://api.github.com${ruta}`, {
+    ...opciones,
+    headers: { ...cabeceras, ...(opciones.headers ?? {}) },
+  });
   const t = await r.text();
   let d = null;
   try {

@@ -8,7 +8,7 @@
  * El endpoint /api/cotizacion debe publicarse por separado (ver README).
  */
 
-import { cp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
+import { cp, mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
 import { renderDocumento } from "./lib/render.mjs";
@@ -39,6 +39,22 @@ async function principal() {
 
   for (const carpeta of ["assets", "src"]) {
     await cp(resolve(RAIZ, carpeta), resolve(DIST, carpeta), { recursive: true });
+  }
+
+  // En subcarpeta (GitHub Pages) el CSS también debe usar rutas relativas:
+  // desde /src/styles/ hacia /assets/ son dos niveles arriba.
+  if (process.env.RELATIVE_PATHS === "1") {
+    const estilos = resolve(DIST, "src", "styles");
+    for (const archivo of await readdir(estilos)) {
+      if (!archivo.endsWith(".css")) continue;
+      const rutaCss = resolve(estilos, archivo);
+      let css = await readFile(rutaCss, "utf8");
+      css = css
+        .replaceAll('url("/assets/', 'url("../../assets/')
+        .replaceAll("url('/assets/", "url('../../assets/")
+        .replaceAll('url("/src/', 'url("../../../src/');
+      await writeFile(rutaCss, css, "utf8");
+    }
   }
 
   // No publicar material de origen pesado
