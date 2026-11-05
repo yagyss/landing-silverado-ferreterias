@@ -87,6 +87,49 @@ async function principal() {
     );
   }
 
+
+  // Rompe la caché del navegador: los módulos JS y el CSS cambian con cada
+  // despliegue, así nadie queda ejecutando una versión anterior del formulario.
+  const VERSION_ASSETS = process.env.ASSET_VERSION || String(Date.now()).slice(0, 10);
+  {
+    const dirs = [resolve(DIST, "src", "js"), resolve(DIST, "src", "data")];
+    for (const dir of dirs) {
+      let archivos = [];
+      try {
+        archivos = await readdir(dir);
+      } catch {
+        continue;
+      }
+      for (const archivo of archivos) {
+        if (!archivo.endsWith(".js") && !archivo.endsWith(".mjs")) continue;
+        const rutaJs = resolve(dir, archivo);
+        let js = await readFile(rutaJs, "utf8");
+        js = js.replace(
+          /(from\s*["'])(\.{1,2}\/[^"']+\.(?:js|mjs))(["'])/g,
+          `$1$2?v=${VERSION_ASSETS}$3`,
+        );
+        js = js.replace(
+          /(import\s*["'])(\.{1,2}\/[^"']+\.(?:js|mjs))(["'])/g,
+          `$1$2?v=${VERSION_ASSETS}$3`,
+        );
+        await writeFile(rutaJs, js, "utf8");
+      }
+    }
+    // Los CSS que importan a otros también se versionan
+    const estilos = resolve(DIST, "src", "styles");
+    try {
+      for (const archivo of await readdir(estilos)) {
+        if (!archivo.endsWith(".css")) continue;
+        const rutaCss = resolve(estilos, archivo);
+        let css = await readFile(rutaCss, "utf8");
+        css = css.replace(/@import\s+url\((["'])([^"']+\.css)\1\)/g, `@import url($1$2?v=${VERSION_ASSETS}$1)`);
+        await writeFile(rutaCss, css, "utf8");
+      }
+    } catch {
+      /* sin hojas que importar */
+    }
+  }
+
   const kb = (Buffer.byteLength(html, "utf8") / 1024).toFixed(1);
   console.log("");
   console.log("  Build estático generado en /dist");

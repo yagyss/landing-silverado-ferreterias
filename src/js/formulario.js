@@ -202,7 +202,8 @@ export function initFormulario() {
         (cuerpo.ok === true || cuerpo.success === true || cuerpo.result === "success");
 
       if (!exitoConfirmado) {
-        mostrarEstado(cuerpo.mensaje ?? MENSAJE_RED);
+        const detalle = respuesta.status && respuesta.status !== 200 ? ' (' + respuesta.status + ')' : '';
+        mostrarEstado((cuerpo.mensaje ?? MENSAJE_RED) + detalle);
         return;
       }
 
