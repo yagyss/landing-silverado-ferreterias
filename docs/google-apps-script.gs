@@ -407,9 +407,21 @@ function enviarCorreoProspecto_(lead) {
     CONFIG.TELEFONO +
     "</p></div></div></div>";
 
+  const texto =
+    "Hola " + lead.nombre + ":\n\n" +
+    "Recibimos tu solicitud de cotización de la Chevrolet Silverado.\n" +
+    "Folio: " + lead.folio + "\n" +
+    "Plan de compra: " + (lead.plan || "—") + "\n" +
+    "Ciudad / Alcaldía: " + (lead.ciudad || "—") + "\n" +
+    "Fecha: " + lead.fecha + "\n\n" +
+    "Un asesor de " + CONFIG.DISTRIBUIDOR + " te contactará en horario " + CONFIG.HORARIO + ".\n" +
+    (CONFIG.WHATSAPP ? "WhatsApp: https://wa.me/" + CONFIG.WHATSAPP + "\n" : "") +
+    "\n" + CONFIG.DISTRIBUIDOR + " · " + CONFIG.TELEFONO + "\n";
+
   MailApp.sendEmail({
     to: lead.correo,
     subject: "Recibimos tu solicitud · Chevrolet Silverado (" + lead.folio + ")",
+    body: texto,
     htmlBody: html,
     name: CONFIG.REMITENTE_NOMBRE,
     replyTo: CONFIG.RESPONDER_A,
@@ -443,9 +455,23 @@ function enviarCorreoAdmin_(lead) {
     '<p style="font-size:12px;color:#6b7280">Actualiza la columna «estado»: Nuevo → Contactado → Cotizado → Ganado / Perdido.</p>' +
     "</div></div></div>";
 
+  const texto =
+    "Nuevo lead de la landing.\n\n" +
+    "Nombre: " + lead.nombre + "\n" +
+    "Celular: " + lead.celular + "\n" +
+    "Correo: " + lead.correo + "\n" +
+    "Plan: " + (lead.plan || "—") + "\n" +
+    "Ciudad: " + (lead.ciudad || "—") + "\n" +
+    "Campaña: " + lead.campana + " · " + lead.origen + "\n" +
+    "Folio: " + lead.folio + "\n" +
+    "Fecha: " + lead.fecha + "\n" +
+    (lead.mensaje ? "Mensaje: " + lead.mensaje + "\n" : "") +
+    "\nHoja de leads: " + libro_().getUrl() + "\n";
+
   MailApp.sendEmail({
     to: correoAdmin_(),
     subject: "Nuevo lead · " + lead.nombre + " · " + (lead.ciudad || "CDMX"),
+    body: texto,
     htmlBody: html,
     name: CONFIG.REMITENTE_NOMBRE,
     replyTo: lead.correo || CONFIG.RESPONDER_A,
@@ -554,7 +580,8 @@ function probarCorreos() {
   }
 
   avisos.push("");
-  avisos.push("Si ambos dicen ✓ y no llegan: revisa Spam, Promociones y la cuota.");
+  avisos.push("Si ambos dicen OK y no llegan: revisa Spam y Promociones.");
+  avisos.push("Los correos salen de la cuenta que ejecuta el script.");
   SpreadsheetApp.getUi().alert(avisos.join("\n"));
 }
 
