@@ -7280,6 +7280,16 @@ html {
   }
 }
 
+
+/* Los CTA de formulario usan la misma caja tipográfica que el botón del hero:
+   «Solicitar cotización», sin mayúsculas forzadas. */
+a[href=#cotizacion].btn,
+a[href=#cotizacion].localnav__cta {
+  text-transform: none;
+  letter-spacing: 0.01em;
+  font-weight: 700;
+}
+
   </style>
   </head>
   <body>
@@ -7364,7 +7374,7 @@ html {
     </nav>
 
     <a class="localnav__cta" href="#cotizacion" data-cta="localnav">
-      Cotizar
+      Solicitar cotización
       <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
         <path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
       </svg>
@@ -8064,7 +8074,7 @@ html {
 
     <div class="oferta__acciones">
       <a class="btn btn--primary btn--lg" href="#cotizacion" data-oferta-cta data-cta="oferta">
-        <span data-oferta-cta-label>QUIERO MI COTIZACIÓN</span>
+        <span data-oferta-cta-label>Solicitar cotización</span>
         <svg class="btn__icon" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false">
           <path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
@@ -8201,7 +8211,7 @@ html {
             que mejor se ajusten a tu ferretería.
           </p>
           <a class="btn btn--primary btn--block" href="#cotizacion" data-cta="faq-asesor">
-            <span>Hablar con un asesor</span>
+            <span>Solicitar cotización</span>
             <svg class="btn__icon" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false">
               <path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
@@ -8427,7 +8437,7 @@ html {
 
     <div class="cierre__acciones">
       <a class="btn btn--primary btn--lg" href="#cotizacion" data-cta="cierre">
-        <span>SOLICITAR COTIZACIÓN</span>
+        <span>Solicitar cotización</span>
         <svg class="btn__icon" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false">
           <path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
@@ -8495,7 +8505,7 @@ html {
                 Aviso de privacidad
               </button>
             </li>
-            <li><a class="site-footer__link" href="#cotizacion">Hablar con un asesor</a></li>
+            <li><a class="site-footer__link" href="#cotizacion">Solicitar cotización</a></li>
           </ul>
         </div>
       </div>
@@ -8745,7 +8755,7 @@ const SITE = {
           "Bono aplicable a la compra de tu unidad, sujeto a la versión, forma de pago y disponibilidad de inventario.",
       },
     ],
-    cta: "QUIERO MI COTIZACIÓN",
+    cta: "Solicitar cotización",
     notaCorta: "Beneficios válidos con distribuidores participantes.",
     notaLegal:
       "Promoción sujeta a disponibilidad de inventario y a las condiciones vigentes del distribuidor autorizado. El bono de hasta $198,000 y el año de seguro gratis aplican únicamente a las versiones participantes, con aseguradora y forma de pago participantes. No es acumulable con otras promociones. Los montos y la vigencia pueden cambiar sin previo aviso; confirma las condiciones exactas con tu asesor al solicitar la cotización.",

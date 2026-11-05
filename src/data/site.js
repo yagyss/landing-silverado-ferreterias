@@ -184,7 +184,7 @@ export const SITE = {
           "Bono aplicable a la compra de tu unidad, sujeto a la versión, forma de pago y disponibilidad de inventario.",
       },
     ],
-    cta: "QUIERO MI COTIZACIÓN",
+    cta: "Solicitar cotización",
     notaCorta: "Beneficios válidos con distribuidores participantes.",
     notaLegal:
       "Promoción sujeta a disponibilidad de inventario y a las condiciones vigentes del distribuidor autorizado. El bono de hasta $198,000 y el año de seguro gratis aplican únicamente a las versiones participantes, con aseguradora y forma de pago participantes. No es acumulable con otras promociones. Los montos y la vigencia pueden cambiar sin previo aviso; confirma las condiciones exactas con tu asesor al solicitar la cotización.",

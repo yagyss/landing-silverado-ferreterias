@@ -1337,3 +1337,13 @@ html {
     animation: none;
   }
 }
+
+
+/* Los CTA de formulario usan la misma caja tipográfica que el botón del hero:
+   «Solicitar cotización», sin mayúsculas forzadas. */
+a[href=#cotizacion].btn,
+a[href=#cotizacion].localnav__cta {
+  text-transform: none;
+  letter-spacing: 0.01em;
+  font-weight: 700;
+}
