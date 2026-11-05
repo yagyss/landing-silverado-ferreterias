@@ -29,6 +29,9 @@ const CONFIG = {
   REMITENTE_NOMBRE: "Chevrolet Silverado · Ferreterías CDMX",
   /** Copia opcional: segundo correo que recibe los avisos (déjalo vacío si no). */
   COPIA_EMAIL: "",
+  /** Si es true, el correo al prospecto llega también (CCO) al administrador.
+   *  Sirve para verificar que el mensaje al lead realmente se envió. */
+  COPIA_OCULTA_LEAD: true,
   RESPONDER_A: "ventas@tudominio.mx",
 
   DISTRIBUIDOR: "Distribuidor autorizado Chevrolet",
@@ -295,7 +298,13 @@ function doPost(evento) {
       fecha: fechaLegible_(ahora),
     };
 
-    const estadoCorreos = { prospecto: "omitido", admin: "omitido", error: "" };
+    const estadoCorreos = {
+      prospecto: "omitido",
+      admin: "omitido",
+      destinoProspecto: correo,
+      destinoAdmin: destinatariosAdmin_(),
+      error: "",
+    };
 
     if (CONFIG.ENVIAR_CORREO_LEAD && correo) {
       try {
@@ -394,6 +403,17 @@ function enviarConRespaldo_(parametros) {
   }
 }
 
+/** Remitente de respuesta válido (evita un dominio inexistente). */
+function responderA_() {
+  const configurado = String(CONFIG.RESPONDER_A || "").trim();
+  const invalido =
+    !configurado ||
+    configurado.indexOf("@") < 1 ||
+    /tudominio\.mx/i.test(configurado) ||
+    /ejemplo|example/i.test(configurado);
+  return invalido ? correoAdmin_() : configurado;
+}
+
 function destinatariosAdmin_() {
   return [correoAdmin_(), String(CONFIG.COPIA_EMAIL || "").trim()]
     .filter((c) => c && c.indexOf("@") > 0)
@@ -448,14 +468,16 @@ function enviarCorreoProspecto_(lead) {
     (CONFIG.WHATSAPP ? "WhatsApp: https://wa.me/" + CONFIG.WHATSAPP + "\n" : "") +
     "\n" + CONFIG.DISTRIBUIDOR + " · " + CONFIG.TELEFONO + "\n";
 
-  MailApp.sendEmail({
+  const opcionesProspecto = {
     to: lead.correo,
     subject: "Recibimos tu solicitud · Chevrolet Silverado (" + lead.folio + ")",
     body: texto,
     htmlBody: html,
     name: CONFIG.REMITENTE_NOMBRE,
-    replyTo: CONFIG.RESPONDER_A,
-  });
+    replyTo: responderA_(),
+  };
+  if (CONFIG.COPIA_OCULTA_LEAD) opcionesProspecto.bcc = correoAdmin_();
+  enviarConRespaldo_(opcionesProspecto);
 }
 
 function enviarCorreoAdmin_(lead) {
@@ -504,7 +526,7 @@ function enviarCorreoAdmin_(lead) {
     body: texto,
     htmlBody: html,
     name: CONFIG.REMITENTE_NOMBRE,
-    replyTo: lead.correo || CONFIG.RESPONDER_A,
+    replyTo: lead.correo || responderA_(),
   });
 }
 
