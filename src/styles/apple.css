@@ -1364,3 +1364,45 @@ a.wa-float {
   text-decoration: none;
   color: inherit;
 }
+
+/* Flecha que señala el formulario */
+.cotiza__alt-flecha {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 0.35rem;
+  color: var(--gold, #c7a24c);
+  vertical-align: -0.15em;
+  animation: flecha-guia 1500ms var(--ease-out) infinite;
+}
+
+.cotiza__alt-flecha svg {
+  width: 30px;
+  height: 15px;
+}
+
+@keyframes flecha-guia {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(7px);
+  }
+}
+
+/* En pantallas angostas el formulario queda debajo: la flecha apunta hacia abajo */
+@media (max-width: 979px) {
+  .cotiza__alt-flecha {
+    display: flex;
+    margin: 0.5rem 0 0;
+    transform: rotate(90deg);
+    transform-origin: left center;
+    animation: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cotiza__alt-flecha {
+    animation: none;
+  }
+}

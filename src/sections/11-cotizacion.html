@@ -38,13 +38,17 @@
           <p class="cotiza__alt-text">
             <strong>Completa el siguiente formulario</strong>: son cinco datos y un asesor te
             contacta con disponibilidad, versiones y opciones de compra.
+            <span class="cotiza__alt-flecha" aria-hidden="true">
+              <svg viewBox="0 0 32 16" fill="none" focusable="false">
+                <path d="M1 8h27m0 0-7-6m7 6-7 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </span>
           </p>
           <p class="cotiza__alt-nota">
             Cotización sin costo y sin compromiso.
           </p>
         </div>
 
-        <p class="disclaimer cotiza__nota" data-form-privacidad-nota></p>
       </div>
 
       <div class="cotiza__card reveal reveal--right" style="--reveal-delay: 90ms">
@@ -52,10 +56,9 @@
           <span class="tag tag--gold">Cotización</span>
           <h3 class="cotiza__card-title">Solicita tu Silverado</h3>
           <p class="cotiza__card-sub">Campos marcados con <span aria-hidden="true">*</span> son obligatorios.</p>
-          <p class="cotiza__card-sub" id="form-ayuda">Puedes llenarlo más rápido con el autocompletado de tu navegador.</p>
         </div>
 
-        <form class="form" data-form-cotizacion novalidate autocomplete="on" aria-describedby="form-ayuda">
+        <form class="form" data-form-cotizacion novalidate autocomplete="on">
           <div class="form__row">
             <div class="form__field">
               <label class="form__label" for="campo-nombre">Nombre completo <span aria-hidden="true">*</span></label>
@@ -161,9 +164,6 @@
           </button>
 
           <p class="form__status" data-form-status role="status" aria-live="polite"></p>
-          <p class="form__legal">
-            Tus datos se usan únicamente para dar seguimiento a tu solicitud de cotización.
-          </p>
         </form>
 
         <div class="form__success" data-form-success hidden>
