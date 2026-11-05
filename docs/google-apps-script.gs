@@ -45,7 +45,10 @@ const CONFIG = {
   ENVIAR_CORREO_LEAD: true,
   ENVIAR_CORREO_ADMIN: true,
 
-  MINUTOS_DEDUPE: 30,
+  MINUTOS_DEDUPE: 10,
+  /** Si alguien repite el envío con el mismo celular, avisa al administrador
+   *  (no se envía correo al prospecto ni se duplica la fila). */
+  AVISAR_DUPLICADOS: true,
 };
 
 /** Columnas que el script garantiza, en este orden, al final de la fila. */
