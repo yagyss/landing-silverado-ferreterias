@@ -13,7 +13,7 @@ NODE_VERSION = "20"
 # Para actualizarla: Implementar → Administrar implementaciones → copiar URL.
 [[redirects]]
 from = "/api/cotizacion"
-to = "https://script.google.com/macros/s/AKfycbwj3hEDWUEcZa94a1ZThZHK4lWbJW7CsmGysRbXUayBrJcTV-MNWNHSd6BcZCZigBua/exec"
+to = "https://script.google.com/macros/s/AKfycbyo3rlLi4VGjD7-Kz-OsWSViRAPOasfpyCG6DornXqCwzOT_aXb1W-WtlM7znlLCAI-/exec"
 status = 200
 force = true
 

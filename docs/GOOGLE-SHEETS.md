@@ -61,7 +61,7 @@ HORARIO: "Lunes a sábado, 9:00 a 19:00 h",
 
 1. En `netlify.toml`, reemplaza:
    ```toml
-   to = "https://script.google.com/macros/s/REEMPLAZA_ESTO/exec"
+   to = "https://script.google.com/macros/s/AKfycbyo3rlLi4VGjD7-Kz-OsWSViRAPOasfpyCG6DornXqCwzOT_aXb1W-WtlM7znlLCAI-/exec"
    ```
    por tu URL real.
 2. `node build.mjs`
