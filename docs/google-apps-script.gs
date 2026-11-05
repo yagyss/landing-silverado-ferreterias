@@ -331,6 +331,12 @@ function doPost(evento) {
       ok: true,
       duplicado: false,
       correo: estadoCorreos,
+      registro: {
+        archivo: libro_().getName(),
+        pestana: hoja.getName(),
+        fila: hoja.getLastRow(),
+        hojaUrl: libro_().getUrl(),
+      },
       folio: folio,
       mensaje:
         "Recibimos tus datos y quedaron registrados con folio " +
@@ -550,4 +556,47 @@ function probarCorreos() {
   avisos.push("");
   avisos.push("Si ambos dicen ✓ y no llegan: revisa Spam, Promociones y la cuota.");
   SpreadsheetApp.getUi().alert(avisos.join("\n"));
+}
+
+/**
+ * Muestra en un aviso: archivo, pestañas, encabezados y últimas filas escritas.
+ * Úsala cuando un lead "no aparece": dirá dónde está escribiendo el script.
+ */
+function revisarHoja() {
+  const libro = SpreadsheetApp.getActiveSpreadsheet();
+  if (!libro) {
+    SpreadsheetApp.getUi().alert("Este proyecto no está ligado a ninguna hoja.");
+    return;
+  }
+
+  const pestanas = libro.getSheets().map((h) => h.getName());
+  const hoja = hoja_();
+  const filas = hoja.getLastRow();
+  const columnas = Math.min(hoja.getLastColumn(), 12);
+  const encabezados = filas > 0 ? hoja.getRange(1, 1, 1, columnas).getValues()[0].join(" | ") : "(vacía)";
+
+  let ultimas = "(sin datos)";
+  if (filas > 1) {
+    const desde = Math.max(2, filas - 2);
+    ultimas = hoja
+      .getRange(desde, 1, filas - desde + 1, columnas)
+      .getValues()
+      .map((f) => f.join(" | "))
+      .join("\n");
+  }
+
+  SpreadsheetApp.getUi().alert(
+    "Archivo: " +
+      libro.getName() +
+      "\n" +
+      libro.getUrl() +
+      "\n\nPestañas: " +
+      pestanas.join(", ") +
+      "\n\nEl script escribe en la PESTAÑA: " +
+      hoja.getName() +
+      "\n(la primera del archivo)\n\nEncabezados:\n" +
+      encabezados +
+      "\n\nÚltimas filas:\n" +
+      ultimas
+  );
 }
