@@ -8,7 +8,7 @@
  * El endpoint /api/cotizacion debe publicarse por separado (ver README).
  */
 
-import { cp, mkdir, rm, writeFile } from "node:fs/promises";
+import { cp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
 import { renderDocumento } from "./lib/render.mjs";
@@ -20,7 +20,21 @@ async function principal() {
   await rm(DIST, { recursive: true, force: true });
   await mkdir(DIST, { recursive: true });
 
-  const html = await renderDocumento({ modo: "build" });
+  let html = await renderDocumento({ modo: "build" });
+
+  // GitHub Pages sirve el sitio en /<repo>/: las rutas absolutas (/assets/…)
+  // apuntarían a la raíz del dominio, así que se vuelven relativas.
+  if (process.env.RELATIVE_PATHS === "1") {
+    html = html
+      .replaceAll('href="/', 'href="')
+      .replaceAll('src="/', 'src="')
+      .replaceAll('srcset="/', 'srcset="')
+      .replaceAll(', /assets/', ', assets/')
+      .replaceAll(' /assets/', ' assets/')
+      .replaceAll('"/assets/', '"assets/')
+      .replaceAll('"/src/', '"src/');
+  }
+
   await writeFile(resolve(DIST, "index.html"), html, "utf8");
 
   for (const carpeta of ["assets", "src"]) {
@@ -43,6 +57,18 @@ async function principal() {
     } catch {
       // opcional: si no existe, se ignora
     }
+  }
+
+  // Deploys manuales (arrastrar carpeta) no leen netlify.toml: se copia la
+  // regla del proxy a _redirects para garantizar /api/cotizacion.
+  const toml = await readFile(resolve(RAIZ, "netlify.toml"), "utf8");
+  const destino = toml.match(/from = "\/api\/cotizacion"\s*\n\s*to = "([^"]+)"/);
+  if (destino) {
+    await writeFile(
+      resolve(DIST, "_redirects"),
+      `/api/cotizacion  ${destino[1]}  200\n`,
+      "utf8",
+    );
   }
 
   const kb = (Buffer.byteLength(html, "utf8") / 1024).toFixed(1);

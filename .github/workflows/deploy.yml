@@ -26,6 +26,8 @@ jobs:
 
       - name: Compilar sitio
         run: node build.mjs
+        env:
+          RELATIVE_PATHS: "1"
 
       - name: Configurar Pages
         uses: actions/configure-pages@v5
