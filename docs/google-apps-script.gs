@@ -27,6 +27,8 @@
 const CONFIG = {
   ADMIN_EMAIL: "ventas@tudominio.mx",
   REMITENTE_NOMBRE: "Chevrolet Silverado · Ferreterías CDMX",
+  /** Copia opcional: segundo correo que recibe los avisos (déjalo vacío si no). */
+  COPIA_EMAIL: "",
   RESPONDER_A: "ventas@tudominio.mx",
 
   DISTRIBUIDOR: "Distribuidor autorizado Chevrolet",
@@ -370,6 +372,34 @@ function fila_(etiqueta, valor) {
   );
 }
 
+/**
+ * Envía el correo por MailApp y, si falla, reintenta con GmailApp.
+ * Ambos envíos son inmediatos: no hay cola ni temporizador.
+ */
+function enviarConRespaldo_(parametros) {
+  try {
+    MailApp.sendEmail(parametros);
+    return "MailApp";
+  } catch (falloMail) {
+    try {
+      GmailApp.sendEmail(parametros.to, parametros.subject, parametros.body, {
+        htmlBody: parametros.htmlBody,
+        name: parametros.name,
+        replyTo: parametros.replyTo,
+      });
+      return "GmailApp";
+    } catch (falloGmail) {
+      throw new Error("MailApp: " + falloMail + " | GmailApp: " + falloGmail);
+    }
+  }
+}
+
+function destinatariosAdmin_() {
+  return [correoAdmin_(), String(CONFIG.COPIA_EMAIL || "").trim()]
+    .filter((c) => c && c.indexOf("@") > 0)
+    .join(",");
+}
+
 function enviarCorreoProspecto_(lead) {
   const wa = CONFIG.WHATSAPP
     ? '<p style="margin:18px 0"><a href="https://wa.me/' +
@@ -468,8 +498,8 @@ function enviarCorreoAdmin_(lead) {
     (lead.mensaje ? "Mensaje: " + lead.mensaje + "\n" : "") +
     "\nHoja de leads: " + libro_().getUrl() + "\n";
 
-  MailApp.sendEmail({
-    to: correoAdmin_(),
+  enviarConRespaldo_({
+    to: destinatariosAdmin_(),
     subject: "Nuevo lead · " + lead.nombre + " · " + (lead.ciudad || "CDMX"),
     body: texto,
     htmlBody: html,
@@ -539,7 +569,7 @@ function verificar() {
  */
 function probarCorreos() {
   const avisos = [];
-  avisos.push("Destinatario administrador: " + correoAdmin_());
+  avisos.push("Destinatario administrador: " + destinatariosAdmin_());
   avisos.push("Cuota diaria restante: " + MailApp.getRemainingDailyQuota() + " correos");
 
   if (String(CONFIG.ADMIN_EMAIL).indexOf("tudominio") >= 0 || !CONFIG.ADMIN_EMAIL) {
