@@ -57,6 +57,15 @@ function empujarDataLayer(evento, parametros) {
 }
 
 /**
+ * Envía un evento a Google Tag Manager (dataLayer) sin pasar por Meta Pixel.
+ * Se usa para conversiones específicas del embudo.
+ */
+export function eventoGTM(nombre, parametros = {}) {
+  empujarDataLayer(nombre, parametros);
+  registrarEnConsola(`[gtm] ${nombre}`, parametros);
+}
+
+/**
  * @param {string} evento
  * @param {Record<string, unknown>} [parametros]
  * @param {{ unaVez?: boolean }} [opciones]

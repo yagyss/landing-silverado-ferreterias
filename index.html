@@ -1,6 +1,26 @@
 <!DOCTYPE html>
 <html lang="es-MX" class="no-js">
   <head>
+
+    <!-- Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-5CJH58QK");
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+    </script>
+    <!-- End Google Tag Manager -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>Chevrolet Silverado para ferreterías | Movilidad para tu negocio</title>
@@ -7394,6 +7414,7 @@ a.wa-float {
   </style>
   </head>
   <body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5CJH58QK" height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript>
     <a class="skip-link" href="#contenido">Saltar al contenido</a>
     <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
 
@@ -9402,6 +9423,15 @@ function empujarDataLayer(evento, parametros) {
 }
 
 /**
+ * Envía un evento a Google Tag Manager (dataLayer) sin pasar por Meta Pixel.
+ * Se usa para conversiones específicas del embudo.
+ */
+function eventoGTM(nombre, parametros = {}) {
+  empujarDataLayer(nombre, parametros);
+  registrarEnConsola(`[gtm] ${nombre}`, parametros);
+}
+
+/**
  * @param {string} evento
  * @param {Record<string, unknown>} [parametros]
  * @param {{ unaVez?: boolean }} [opciones]
@@ -10355,6 +10385,13 @@ function initFormulario() {
       return;
     }
 
+    // Conversión GTM: clic en «Solicitar mi cotización»
+    eventoGTM("cotizacion_click", {
+      plan: limpio.plan,
+      ubicacion: "formulario",
+      pagina: window.location.pathname,
+    });
+
     const textoOriginal = boton?.innerHTML;
     if (boton) {
       boton.disabled = true;
@@ -10475,6 +10512,17 @@ function initFormulario() {
       }
 
       trackLead({ folio, plan: limpio.plan, duplicado: cuerpo.duplicado === true });
+
+      // Conversión para Google Tag Manager: sólo cuando el servidor confirmó
+      // el registro y no se trata de un envío repetido.
+      if (cuerpo.duplicado !== true) {
+        eventoGTM("generate_lead", {
+          folio: folio,
+          plan: limpio.plan,
+          value: 1,
+          currency: "MXN",
+        });
+      }
     } catch (fallo) {
       console.error("[formulario]", fallo);
       mostrarEstado(MENSAJE_RED);

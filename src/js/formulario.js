@@ -4,7 +4,7 @@
  */
 
 import { SITE } from "../data/site.js";
-import { trackLead } from "./analytics.js";
+import { eventoGTM, trackLead } from "./analytics.js";
 import { escapar, leerUtm } from "./dom.js";
 import { formatearTelefono, normalizarTelefono, validarProspecto } from "./validation.mjs";
 
@@ -102,6 +102,13 @@ export function initFormulario() {
       mostrarEstado("Revisa los campos marcados.");
       return;
     }
+
+    // Conversión GTM: clic en «Solicitar mi cotización»
+    eventoGTM("cotizacion_click", {
+      plan: limpio.plan,
+      ubicacion: "formulario",
+      pagina: window.location.pathname,
+    });
 
     const textoOriginal = boton?.innerHTML;
     if (boton) {
@@ -223,6 +230,17 @@ export function initFormulario() {
       }
 
       trackLead({ folio, plan: limpio.plan, duplicado: cuerpo.duplicado === true });
+
+      // Conversión para Google Tag Manager: sólo cuando el servidor confirmó
+      // el registro y no se trata de un envío repetido.
+      if (cuerpo.duplicado !== true) {
+        eventoGTM("generate_lead", {
+          folio: folio,
+          plan: limpio.plan,
+          value: 1,
+          currency: "MXN",
+        });
+      }
     } catch (fallo) {
       console.error("[formulario]", fallo);
       mostrarEstado(MENSAJE_RED);
