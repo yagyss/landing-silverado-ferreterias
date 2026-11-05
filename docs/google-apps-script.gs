@@ -54,17 +54,7 @@ const CONFIG = {
 };
 
 /** Columnas que el script garantiza, en este orden, al final de la fila. */
-const COLUMNAS_PROPIAS = [
-  "fecha",
-  "fuente",
-  "estado",
-  "asesor",
-  "notas",
-  "folio",
-  "campana",
-  "repetido",
-  "veces",
-];
+const COLUMNAS_PROPIAS = ["fecha", "fuente", "estado", "asesor", "notas", "folio", "campana"];
 
 /** Equivalencias aceptadas para cada dato. */
 const ALIAS = {
@@ -254,64 +244,27 @@ function doPost(evento) {
     const filas = hoja.getLastRow();
     const ahora = new Date();
 
-    // Historial del celular: marca repetidos sin bloquear el registro.
-    let enviosPrevios = 0;
-    let folioPrevio = "";
-
-    if (filas > 1 && mapa.telefono) {
-      const desde = Math.max(2, filas - 999);
+    // Deduplicación por celular (solo si CONFIG.MINUTOS_DEDUPE > 0)
+    if (CONFIG.MINUTOS_DEDUPE > 0 && filas > 1 && mapa.telefono) {
+      const desde = Math.max(2, filas - 199);
       const valores = hoja.getRange(desde, mapa.telefono, filas - desde + 1, 1).getValues();
       const fechas = mapa.fecha
         ? hoja.getRange(desde, mapa.fecha, filas - desde + 1, 1).getValues()
         : [];
       const limite = Date.now() - CONFIG.MINUTOS_DEDUPE * 60 * 1000;
 
-      for (let i = 0; i < valores.length; i++) {
-        if (telefono_(valores[i][0]) !== celular) continue;
-        enviosPrevios += 1;
-
-        if (!folioPrevio && mapa.folio) {
-          const valor = hoja.getRange(desde + i, mapa.folio).getValue();
-          folioPrevio = valor ? String(valor) : "";
-        }
-
-        // Solo bloquea si CONFIG.MINUTOS_DEDUPE > 0
-        if (CONFIG.MINUTOS_DEDUPE > 0) {
-          const fechaFila = fechas.length ? fechas[i][0] : "";
-          const reciente = fechaFila instanceof Date && fechaFila.getTime() > limite;
-          if (!reciente) continue;
-
-          if (CONFIG.AVISAR_DUPLICADOS) {
-            try {
-              MailApp.sendEmail({
-                to: destinatariosAdmin_(),
-                subject: "Envío repetido · " + nombre + " · " + celular,
-                body:
-                  "Alguien volvió a enviar el formulario con un celular registrado hace " +
-                  CONFIG.MINUTOS_DEDUPE +
-                  " minutos.\n\nNombre: " +
-                  nombre +
-                  "\nCelular: " +
-                  celular +
-                  "\nCorreo: " +
-                  correo +
-                  "\nPlan: " +
-                  plan +
-                  "\nFolio original: " +
-                  (folioPrevio || "—") +
-                  "\n",
-                name: CONFIG.REMITENTE_NOMBRE,
-                replyTo: responderA_(),
-              });
-            } catch (falloAviso) {
-              registrarError_("aviso-duplicado", falloAviso, celular);
-            }
-          }
-
+      for (let i = valores.length - 1; i >= 0; i--) {
+        const mismo = telefono_(valores[i][0]) === celular;
+        const fechaFila = fechas.length ? fechas[i][0] : "";
+        const reciente = fechaFila instanceof Date ? fechaFila.getTime() > limite : false;
+        if (mismo && reciente) {
+          const folioPrevio = mapa.folio
+            ? hoja.getRange(2 + i, mapa.folio).getValue()
+            : "";
           return respuesta_({
             ok: true,
             duplicado: true,
-            folio: folioPrevio,
+            folio: String(folioPrevio || ""),
             mensaje:
               "Ya tenemos una solicitud reciente con este número. Un asesor te contactará.",
           });
@@ -337,8 +290,6 @@ function doPost(evento) {
     poner("estado", "Nuevo");
     poner("folio", folio);
     poner("campana", limpiar_(origen.utm_campaign, 120) || "silverado-ferreterias-cdmx-2026");
-    poner("repetido", enviosPrevios > 0 ? "Sí" : "No");
-    poner("veces", String(enviosPrevios + 1));
 
     hoja.appendRow(fila);
 
@@ -352,8 +303,6 @@ function doPost(evento) {
       ciudad: limpiar_(datos.ciudad, 60),
       campana: limpiar_(origen.utm_campaign, 120) || "campaña directa",
       origen: limpiar_(origen.utm_source, 80) || "orgánico",
-      repetido: enviosPrevios > 0,
-      veces: enviosPrevios + 1,
       fecha: fechaLegible_(ahora),
     };
 
@@ -407,8 +356,6 @@ function doPost(evento) {
         fila: hoja.getLastRow(),
         hojaUrl: libro_().getUrl(),
       },
-      repetido: enviosPrevios > 0,
-      veces: enviosPrevios + 1,
       folio: folio,
       mensaje:
         "Recibimos tus datos y quedaron registrados con folio " +
@@ -560,7 +507,6 @@ function enviarCorreoAdmin_(lead) {
     fila_("Ciudad", lead.ciudad) +
     fila_("Campaña", lead.campana + " · " + lead.origen) +
     fila_("Fecha", lead.fecha) +
-    (lead.repetido ? fila_("Repetido", "Sí · envío " + lead.veces) : "") +
     (lead.mensaje ? fila_("Mensaje", lead.mensaje) : "") +
     "</table>" +
     '<p style="margin:20px 0"><a href="' +
@@ -579,7 +525,6 @@ function enviarCorreoAdmin_(lead) {
     "Campaña: " + lead.campana + " · " + lead.origen + "\n" +
     "Folio: " + lead.folio + "\n" +
     "Fecha: " + lead.fecha + "\n" +
-    (lead.repetido ? "Repetido: sí (envío " + lead.veces + ")\n" : "") +
     (lead.mensaje ? "Mensaje: " + lead.mensaje + "\n" : "") +
     "\nHoja de leads: " + libro_().getUrl() + "\n";
 
