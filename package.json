@@ -1,0 +1,18 @@
+{
+  "name": "landing-silverado-ferreterias",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Landing page de alta conversión Chevrolet Silverado para propietarios de ferreterías de la Ciudad de México.",
+  "scripts": {
+    "dev": "node server.mjs",
+    "start": "node server.mjs",
+    "build": "node build.mjs",
+    "imagenes": "python scripts/procesar-imagenes.py"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": ["chevrolet", "silverado", "ferreterias", "cdmx", "landing", "meta-ads"],
+  "license": "UNLICENSED"
+}

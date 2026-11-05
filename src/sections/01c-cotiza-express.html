@@ -1,0 +1,75 @@
+<section class="express" id="cotiza-express" aria-labelledby="express-titulo">
+  <div class="container express__inner">
+    <div class="express__texto">
+      <p class="eyebrow eyebrow--light">Cotización</p>
+      <h2 class="express__titulo" id="express-titulo">Cotiza en un minuto.</h2>
+      <p class="express__bajada">
+        Déjanos tu nombre, WhatsApp y alcaldía. Un asesor te contacta con disponibilidad,
+        versiones y opciones de compra.
+      </p>
+      <ul class="express__puntos">
+        <li>Sin costo y sin compromiso</li>
+        <li>Respuesta de un asesor</li>
+        <li>Datos usados solo para tu cotización</li>
+      </ul>
+    </div>
+
+    <div class="express__panel">
+      <form class="express__form" data-form-express novalidate>
+        <div class="express__campo">
+          <label class="express__label" for="express-nombre">Nombre completo</label>
+          <input class="express__input" id="express-nombre" name="nombre" type="text" autocomplete="name" placeholder="Ej. Juan Pérez" required />
+          <p class="form__error" data-error-for="nombre"></p>
+        </div>
+
+        <div class="express__campo">
+          <label class="express__label" for="express-whatsapp">WhatsApp</label>
+          <input class="express__input" id="express-whatsapp" name="whatsapp" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="55 1234 5678" required />
+          <p class="form__error" data-error-for="whatsapp"></p>
+        </div>
+
+        <div class="express__campo">
+          <label class="express__label" for="express-ciudad">Ciudad o alcaldía</label>
+          <div class="form__select-wrap">
+            <select class="express__input express__select" id="express-ciudad" name="ciudad" required>
+              <option value="" selected disabled>Selecciona tu alcaldía</option>
+            </select>
+            <svg class="form__chevron" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 6 4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          </div>
+          <p class="form__error" data-error-for="ciudad"></p>
+        </div>
+
+        <div class="form__check express__check">
+          <input class="form__checkbox" id="express-privacidad" name="privacidad" type="checkbox" required />
+          <label class="form__check-label" for="express-privacidad">
+            Acepto el
+            <button class="form__link" type="button" data-open-privacidad>aviso de privacidad</button>
+            y ser contactado.
+          </label>
+        </div>
+        <p class="form__error" data-error-for="privacidad"></p>
+
+        <input type="hidden" name="iniciadoEn" data-express-inicio value="0" />
+        <div class="form__trap" aria-hidden="true">
+          <label for="express-trampa">No llenar</label>
+          <input id="express-trampa" name="honeypot" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+
+        <button class="btn btn--primary btn--pill btn--block express__enviar" type="submit" data-express-submit>
+          <span>Solicitar cotización</span>
+        </button>
+
+        <p class="form__status express__estado" data-express-status role="status" aria-live="polite"></p>
+      </form>
+
+      <div class="express__exito" data-express-exito hidden>
+        <span class="form__success-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><path d="m5 12.5 4.5 4.5L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+        </span>
+        <h3>Solicitud registrada</h3>
+        <p data-express-mensaje>Recibimos tus datos. Un asesor te contactará por WhatsApp.</p>
+        <p class="express__folio" data-express-folio-wrap hidden>Folio: <strong data-express-folio></strong></p>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,1035 @@
+/* ============================================================================
+   ARTE FINAL · Capa de dirección de arte que se carga al final.
+   Contiene los ajustes globales para que toda la página comparta el mismo
+   lenguaje visual del hero (grafito profundo, oro metálico, fotografía limpia).
+   ==========================================================================*/
+
+:root {
+  /* Oro metálico más luminoso (antes se veía pardo sobre fondos claros) */
+  --oro-claro: #f3dda6;
+  --oro-medio: #d2ad60;
+  --oro-hondo: #9c7c31;
+  --oro-gradiente: linear-gradient(100deg, var(--oro-claro) 0%, var(--oro-medio) 42%, var(--oro-hondo) 100%);
+}
+
+/* Los acentos dorados de la página usan el mismo degradado del hero */
+.eyebrow {
+  color: var(--gold-deep);
+}
+
+.rule--gold {
+  background: var(--oro-gradiente);
+}
+
+.btn--primary {
+  background: linear-gradient(135deg, #f5dfae 0%, #d9b766 42%, #b9924a 78%, #9c7c31 100%);
+}
+
+/* ==========================================================================
+   SECCIÓN 3 · La camioneta, en escenario nocturno
+   ==========================================================================*/
+
+.solucion--cine {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: radial-gradient(ellipse 70% 60% at 78% 18%, rgba(199, 162, 76, 0.14), transparent 62%),
+    radial-gradient(ellipse 80% 70% at 12% 92%, rgba(28, 70, 126, 0.34), transparent 66%),
+    linear-gradient(172deg, #070a11 0%, #0a1019 52%, #080d16 100%);
+  color: #eef1f5;
+}
+
+.solucion--cine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse 88% 70% at 50% 46%, transparent 42%, rgba(3, 5, 9, 0.7) 100%);
+}
+
+.solucion--cine .container {
+  position: relative;
+  z-index: 1;
+}
+
+.solucion__ghost {
+  position: absolute;
+  top: clamp(1rem, 4vw, 3rem);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(3.5rem, 13vw, 11rem);
+  letter-spacing: 0.14em;
+  line-height: 1;
+  white-space: nowrap;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.06);
+  pointer-events: none;
+  user-select: none;
+}
+
+.solucion--cine .section-header {
+  max-width: 720px;
+}
+
+.solucion--cine h2 {
+  color: #ffffff;
+}
+
+.solucion--cine .lead {
+  color: #b4becc;
+}
+
+.solucion--cine .eyebrow {
+  color: var(--gold-bright);
+}
+
+/* Escenario: la foto recortada flota, sin tarjeta ni borde */
+.solucion--cine .solucion-stage {
+  background: none;
+  border: 0;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0;
+  overflow: visible;
+}
+
+.solucion--cine .solucion-stage::before {
+  display: none;
+}
+
+.solucion--cine .solucion-stage__img {
+  mix-blend-mode: normal;
+  filter: drop-shadow(0 42px 60px rgba(0, 0, 0, 0.62));
+}
+
+.solucion--cine .solucion-stage:hover .solucion-stage__img {
+  transform: translateY(-4px) scale(1.012);
+}
+
+.solucion--cine .solucion-stage__tag {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.18);
+  color: #f0f3f7;
+  backdrop-filter: blur(10px);
+}
+
+.solucion--cine .solucion-caption {
+  color: #7d8794;
+}
+
+.solucion--cine .solucion-item {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.solucion--cine .solucion-item:hover {
+  border-color: rgba(199, 162, 76, 0.45);
+}
+
+.solucion--cine .solucion-item h3 {
+  color: #ffffff;
+}
+
+.solucion--cine .solucion-item__body p {
+  color: #9aa4b2;
+}
+
+.solucion--cine .solucion-item__index {
+  color: var(--gold);
+}
+
+/* Ficha técnica sobre fondo oscuro */
+.solucion--cine .solucion-ficha {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+}
+
+.solucion--cine .solucion-ficha h3 {
+  color: #ffffff;
+}
+
+.solucion--cine .solucion-ficha .tag--gold {
+  background: rgba(199, 162, 76, 0.16);
+  border-color: rgba(199, 162, 76, 0.4);
+  color: var(--oro-claro);
+}
+
+.solucion--cine [data-specs-silverado] {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.solucion--cine [data-specs-silverado] .spec {
+  background: #0c121c;
+}
+
+.solucion--cine [data-specs-silverado] .spec__label {
+  color: #8792a1;
+}
+
+.solucion--cine [data-specs-silverado] .spec__value strong {
+  color: #ffffff;
+}
+
+.solucion--cine [data-specs-silverado] .spec__nota {
+  color: #6f7a88;
+}
+
+.solucion--cine [data-specs-silverado] .spec__estado {
+  color: var(--gold-bright);
+}
+
+.solucion--cine .disclaimer {
+  color: #77818f;
+}
+
+/* ==========================================================================
+   Detalles globales de acabado
+   ==========================================================================*/
+
+/* Titulares ligeramente más ajustados y con mejor ritmo en móvil */
+h2 {
+  letter-spacing: -0.03em;
+}
+
+/* Las tarjetas claras ganan profundidad con un borde más fino */
+.card {
+  border-color: rgba(11, 14, 19, 0.08);
+}
+
+/* Enlace de navegación activo con subrayado dorado más visible */
+.nav__link.is-active::after {
+  background: var(--oro-gradiente);
+}
+
+/* --- Composición de la sección 3: respiración y anclaje de la unidad --- */
+.solucion--cine .solucion-layout {
+  align-items: start;
+  gap: clamp(2rem, 4vw, 3.5rem);
+}
+
+.solucion--cine .solucion-stage {
+  padding-inline: clamp(0.5rem, 2.5vw, 2rem);
+  padding-block: clamp(0.5rem, 1.5vw, 1rem) 0;
+}
+
+.solucion--cine .solucion-figura {
+  position: relative;
+}
+
+/* Piso de luz bajo la camioneta */
+.solucion--cine .solucion-figura::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 12%;
+  width: 60%;
+  height: 40px;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0) 70%);
+  filter: blur(10px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.solucion--cine .solucion-stage__tag {
+  top: 0.25rem;
+  left: auto;
+  right: 0.5rem;
+}
+
+.solucion--cine .solucion-item:first-child {
+  border-top: 0;
+}
+
+@media (min-width: 1080px) {
+  .solucion--cine .solucion-layout {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  }
+
+  .solucion--cine .solucion-stage {
+    padding-inline: clamp(1rem, 3.5vw, 3rem);
+  }
+}
+
+/* ==========================================================================
+   SECCIÓN 2 · El problema, en clave editorial
+   Sin cajas blancas: cuatro columnas separadas por líneas finas, como una
+   revista de producto.
+   ==========================================================================*/
+
+.problema-grid {
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  align-items: start;
+}
+
+.problema-card.problema-card {
+  position: relative;
+  padding: clamp(1.1rem, 2vw, 1.6rem) 0 0;
+  background: transparent;
+  border: 0;
+  border-top: 1px solid var(--line-strong);
+  border-radius: 0;
+  box-shadow: none;
+  transition: border-color var(--dur) var(--ease-out);
+}
+
+.problema-card.problema-card::before {
+  display: none;
+}
+
+.problema-card.problema-card:hover {
+  transform: none;
+  box-shadow: none;
+  border-top-color: var(--gold);
+}
+
+.problema-card__top {
+  margin-bottom: 0.9rem;
+}
+
+.problema-card__icon {
+  background: transparent !important;
+  border-color: var(--line-strong) !important;
+  color: var(--gold-deep) !important;
+}
+
+.problema-card__num {
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  color: var(--steel-light);
+}
+
+.problema-card h3 {
+  font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+  margin-bottom: 0.4rem;
+}
+
+.problema-card p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+/* El remate mantiene el bloque destacado pero sin caja dura */
+.problema-cierre {
+  border: 0;
+  border-left: 2px solid var(--gold);
+  border-radius: 0;
+  background: linear-gradient(100deg, rgba(199, 162, 76, 0.09), rgba(199, 162, 76, 0.01));
+  box-shadow: none;
+}
+
+/* ==========================================================================
+   SECCIÓN 4 · Beneficios con separadores, no con tarjetas
+   ==========================================================================*/
+
+.beneficios-grid {
+  gap: clamp(1.5rem, 3vw, 2.75rem) clamp(1.5rem, 3vw, 2.25rem);
+  align-items: start;
+}
+
+.beneficios-card {
+  padding: clamp(1rem, 2vw, 1.5rem) 0 0;
+  background: transparent;
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 0;
+  box-shadow: none;
+  transition: border-color var(--dur) var(--ease-out);
+}
+
+.beneficios-card:hover {
+  transform: none;
+  border-top-color: var(--gold);
+  box-shadow: none;
+  background: transparent;
+}
+
+.beneficios-card__num {
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+}
+
+.beneficios-card__num::after {
+  background: linear-gradient(90deg, var(--oro-medio), transparent);
+}
+
+.beneficios-card h3 {
+  font-size: clamp(0.95rem, 1.35vw, 1.08rem);
+  letter-spacing: 0.06em;
+  color: #ffffff;
+}
+
+.beneficios-card p {
+  font-size: 0.89rem;
+  line-height: 1.6;
+  color: #9aa4b2;
+}
+
+/* La pieza de imagen gana protagonismo y pierde el marco */
+.beneficios-media {
+  border-radius: var(--r-md);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ==========================================================================
+   Secciones claras: menos cajas, más aire y jerarquía
+   ==========================================================================*/
+
+.section--mist .card:not(.problema-card) {
+  border-color: rgba(11, 14, 19, 0.07);
+  box-shadow: none;
+}
+
+.section--mist {
+  background: linear-gradient(180deg, #f5f6f8 0%, #f2f4f7 100%);
+}
+
+.section--paper {
+  background: linear-gradient(180deg, #ffffff 0%, #fdfdfe 100%);
+}
+
+/* Beneficios: altura natural y sin relleno dorado en la quinta tarjeta */
+.beneficios-card,
+.beneficios-card.beneficios-card {
+  min-height: 0;
+}
+
+.beneficios-grid > :last-child {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.beneficios-grid {
+  row-gap: clamp(1.75rem, 3vw, 2.5rem);
+}
+
+/* ==========================================================================
+   SECCIÓN 5 · Carga y remolque, póster a sangre
+   La pieza de campaña sangra hasta el borde derecho y se funde con el texto
+   mediante un degradado, en lugar de vivir dentro de una tarjeta.
+   ==========================================================================*/
+
+.remolque--sangre {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-block: clamp(3.5rem, 7vw, 6rem);
+  background: #080c13;
+  color: #eef1f5;
+}
+
+.remolque--sangre::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: radial-gradient(ellipse 60% 60% at 8% 30%, rgba(199, 162, 76, 0.1), transparent 62%),
+    radial-gradient(ellipse 70% 70% at 30% 100%, rgba(28, 70, 126, 0.22), transparent 66%);
+  pointer-events: none;
+}
+
+.remolque--sangre .container {
+  position: relative;
+  z-index: 2;
+}
+
+.remolque--sangre .section-header {
+  max-width: 560px;
+  margin-bottom: clamp(1.75rem, 3vw, 2.5rem);
+}
+
+.remolque--sangre .eyebrow {
+  color: var(--gold-bright);
+}
+
+.remolque--sangre h2 {
+  color: #ffffff;
+}
+
+.remolque--sangre .lead {
+  color: #b4becc;
+}
+
+/* El póster sale del flujo y sangra por la derecha */
+.remolque--sangre .remolque-layout {
+  display: block;
+}
+
+.remolque--sangre .remolque-poster {
+  position: absolute;
+  inset: 0 0 0 auto;
+  width: 54%;
+  margin: 0;
+  z-index: 1;
+}
+
+.remolque--sangre .remolque-poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 52% 42%;
+}
+
+.remolque--sangre .remolque-poster::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    #080c13 0%,
+    rgba(8, 12, 19, 0.92) 18%,
+    rgba(8, 12, 19, 0.45) 46%,
+    rgba(8, 12, 19, 0) 74%
+  );
+}
+
+.remolque--sangre .remolque-contenido {
+  position: relative;
+  max-width: 620px;
+  color: #c8d0dc;
+}
+
+.remolque--sangre .remolque-contenido > .eyebrow {
+  margin-bottom: 0.6rem;
+}
+
+.remolque--sangre .remolque-intro {
+  color: #aab4c2;
+  font-size: var(--fs-small);
+  max-width: 46ch;
+  margin-bottom: 1.2rem;
+}
+
+.remolque--sangre .remolque-lista {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+}
+
+.remolque--sangre .remolque-item {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  gap: 0.85rem;
+  padding: 0.8rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.remolque--sangre .remolque-item__icon {
+  color: var(--gold);
+  border-color: rgba(199, 162, 76, 0.32);
+  background: rgba(199, 162, 76, 0.08);
+}
+
+.remolque--sangre .remolque-item h3 {
+  color: #ffffff;
+  font-size: 0.92rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.remolque--sangre .remolque-item p {
+  color: #8e99a7;
+  font-size: 0.82rem;
+}
+
+/* Fotos de detalle */
+.remolque--sangre .remolque-fotos {
+  margin-top: 1.4rem;
+}
+
+.remolque--sangre .remolque-foto img {
+  border-radius: var(--r-sm);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.remolque--sangre .remolque-foto figcaption {
+  color: #7f8a98;
+}
+
+/* Nota legal: sobre oscuro, con acento dorado */
+.remolque--sangre .remolque-nota {
+  position: relative;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-left: 2px solid var(--gold);
+  border-radius: 0 var(--r-md) var(--r-md) 0;
+  backdrop-filter: blur(6px);
+  max-width: 720px;
+}
+
+.remolque--sangre .remolque-nota__icon {
+  color: var(--gold-bright);
+}
+
+.remolque--sangre .remolque-nota__title {
+  color: #ffffff;
+}
+
+.remolque--sangre .remolque-nota .disclaimer {
+  color: #9aa4b2;
+}
+
+.remolque--sangre .remolque-cta {
+  position: relative;
+  z-index: 2;
+  margin-top: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+@media (max-width: 1079px) {
+  .remolque--sangre .remolque-poster {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    max-height: 420px;
+    margin-top: 1.75rem;
+    border-radius: var(--r-md);
+    overflow: hidden;
+  }
+
+  .remolque--sangre .remolque-poster img {
+    max-height: 420px;
+    object-position: 50% 30%;
+  }
+
+  .remolque--sangre .remolque-poster::after {
+    background: linear-gradient(180deg, rgba(8, 12, 19, 0.15) 0%, rgba(8, 12, 19, 0.75) 100%);
+  }
+}
+
+@media (min-width: 1080px) {
+  .remolque--sangre .remolque-lista {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 1.75rem;
+  }
+}
+
+/* --------------------------------------------------------------- Tipografía */
+h1,
+h2,
+h3,
+.hero__title,
+.cotiza__titulo,
+.oferta__titulo {
+  font-stretch: 94%;
+  font-variation-settings: "wdth" 94;
+}
+
+/* ----------------------------------------------------------- Pie de página */
+.site-footer__logo {
+  height: 26px;
+  width: auto;
+  margin-bottom: 0.5rem;
+  opacity: 0.95;
+}
+
+.site-footer__model {
+  margin-top: 0.15rem;
+}
+
+/* --- Remolque a sangre: composición en rejilla (corrige el traslape) --- */
+@media (min-width: 1080px) {
+  .remolque--sangre .remolque-layout.remolque-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 47%) minmax(0, 53%);
+    align-items: stretch;
+    gap: clamp(1.5rem, 3vw, 3rem);
+  }
+
+  .remolque--sangre .remolque-poster.remolque-poster {
+    position: relative;
+    inset: auto;
+    width: auto;
+    height: 100%;
+    margin: 0 calc(50% - 50vw) 0 0;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    overflow: hidden;
+  }
+
+  .remolque--sangre .remolque-poster.remolque-poster img {
+    width: 100%;
+    height: 100%;
+    min-height: 620px;
+    object-fit: cover;
+    object-position: 54% 42%;
+    border-radius: 0;
+  }
+
+  .remolque--sangre .remolque-poster.remolque-poster::after {
+    background: linear-gradient(
+      90deg,
+      #080c13 0%,
+      rgba(8, 12, 19, 0.85) 12%,
+      rgba(8, 12, 19, 0.25) 34%,
+      rgba(8, 12, 19, 0) 58%
+    );
+  }
+
+  .remolque--sangre .remolque-contenido.remolque-contenido {
+    max-width: none;
+    padding-block: 0.5rem;
+  }
+
+  .remolque--sangre .remolque-lista.remolque-lista {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .remolque--sangre .remolque-fotos.remolque-fotos {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Evita el bloque blanco bajo el póster en cualquier ancho */
+.remolque--sangre .remolque-poster {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+/* --- Remolque: póster anclado al borde de la ventana (definitivo) --- */
+@media (min-width: 1080px) {
+  .remolque--sangre {
+    min-height: clamp(660px, 72vh, 860px);
+  }
+
+  .remolque--sangre .container {
+    position: static;
+  }
+
+  .remolque--sangre .remolque-layout.remolque-layout {
+    display: block;
+  }
+
+  .remolque--sangre .remolque-poster.remolque-poster {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: auto;
+    width: min(58vw, 940px);
+    height: auto;
+    margin: 0;
+    z-index: 1;
+  }
+
+  .remolque--sangre .remolque-poster.remolque-poster img {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    object-fit: cover;
+    object-position: 52% 40%;
+  }
+
+  .remolque--sangre .remolque-contenido.remolque-contenido {
+    position: relative;
+    z-index: 3;
+    max-width: 560px;
+  }
+
+  .remolque--sangre .remolque-lista.remolque-lista {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .remolque--sangre .remolque-fotos.remolque-fotos {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .remolque--sangre .remolque-nota,
+  .remolque--sangre .remolque-cta {
+    position: relative;
+    z-index: 3;
+    max-width: 560px;
+  }
+
+  /* El encabezado no debe quedar debajo del degradado del póster */
+  .remolque--sangre .section-header {
+    position: relative;
+    z-index: 3;
+    max-width: 620px;
+  }
+}
+
+/* --- Remolque: póster como fondo de sección (versión determinista) --- */
+.remolque__fondo {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 0;
+  background-image: url("/assets/vehiculos/silverado/cierre-cinematico-1122.webp");
+  background-repeat: no-repeat;
+  background-position: 62% 52%;
+  background-size: cover;
+  pointer-events: none;
+}
+
+.remolque__fondo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+      180deg,
+      rgba(8, 12, 19, 0.55) 0%,
+      rgba(8, 12, 19, 0.25) 45%,
+      rgba(8, 12, 19, 0.75) 100%
+    ),
+    linear-gradient(
+      90deg,
+      #080c13 0%,
+      rgba(8, 12, 19, 0.94) 30%,
+      rgba(8, 12, 19, 0.55) 58%,
+      rgba(8, 12, 19, 0.2) 100%
+    );
+}
+
+@media (min-width: 1080px) {
+  .remolque--sangre .remolque__fondo {
+    width: 100%;
+    background-position: 100% 56%;
+  }
+
+  .remolque--sangre .remolque__fondo::after {
+    background: linear-gradient(
+      90deg,
+      #080c13 0%,
+      rgba(8, 12, 19, 0.92) 26%,
+      rgba(8, 12, 19, 0.35) 62%,
+      rgba(8, 12, 19, 0) 100%
+    );
+  }
+
+  .remolque--sangre .remolque-contenido.remolque-contenido {
+    max-width: 560px;
+  }
+
+  .remolque--sangre .remolque-fotos.remolque-fotos {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Miniatura del póster dentro de la franja de fotos */
+.remolque--sangre .remolque-foto--poster img {
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: 50% 24%;
+}
+
+/* ==========================================================================
+   SECCIÓN 7 · Promoción a sangre
+   La camioneta aparece recortada, muy tenue, detrás del bono; las tarjetas se
+   convierten en bloques tipográficos separados por líneas finas.
+   ==========================================================================*/
+
+.oferta {
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.oferta__inner {
+  position: relative;
+  z-index: 2;
+}
+
+.oferta__truck {
+  position: absolute;
+  right: -6%;
+  bottom: -4%;
+  width: min(70vw, 1040px);
+  height: auto;
+  z-index: 0;
+  opacity: 0.6;
+  filter: drop-shadow(0 40px 70px rgba(0, 0, 0, 0.65));
+  mask-image: radial-gradient(ellipse 86% 92% at 60% 86%, #000 34%, transparent 82%);
+  -webkit-mask-image: radial-gradient(ellipse 78% 82% at 62% 88%, #000 26%, transparent 76%);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Tarjetas: bloques tipográficos, sin caja */
+.oferta .oferta__beneficios {
+  gap: clamp(1.75rem, 4vw, 3.25rem);
+  align-items: start;
+  margin-top: clamp(1rem, 2.5vw, 1.75rem);
+}
+
+.oferta .oferta__card {
+  position: relative;
+  padding: clamp(1.25rem, 2.4vw, 1.9rem) 0 0;
+  background: transparent;
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+  overflow: visible;
+}
+
+.oferta .oferta__card::before {
+  display: none;
+}
+
+.oferta .oferta__numero {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+}
+
+.oferta .oferta__etiqueta {
+  font-family: var(--font-display);
+  font-size: clamp(2.7rem, 5.4vw, 4.5rem);
+  line-height: 0.9;
+  letter-spacing: -0.035em;
+  background: linear-gradient(100deg, #f8e6bb 0%, #dcb96b 34%, #c7a24c 62%, #96762e 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  padding-block: 0.06em;
+}
+
+.oferta .oferta__titulo {
+  margin-top: 0.35rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 2vw, 1.5rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+}
+
+.oferta .oferta__detalle {
+  margin-top: 0.6rem;
+  max-width: 42ch;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: #a6b0be;
+}
+
+.oferta .oferta__acciones {
+  margin-top: clamp(1.75rem, 3.5vw, 2.75rem);
+}
+
+.oferta .oferta__notas {
+  position: relative;
+  z-index: 2;
+}
+
+@media (min-width: 760px) {
+  .oferta .oferta__beneficios {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1079px) {
+  .oferta__truck {
+    width: 120vw;
+    right: -30%;
+    bottom: -2%;
+    opacity: 0.26;
+  }
+}
+
+/* ==========================================================================
+   SECCIÓN 9 · Testimonios de ejemplo
+   Tarjeta limpia, cita en primer plano y etiqueta visible de "ejemplo".
+   ==========================================================================*/
+
+.testimonios__tarjeta--ejemplo {
+  position: relative;
+  background: linear-gradient(168deg, #ffffff 0%, #fafbfc 100%);
+  border: 1px solid rgba(11, 14, 19, 0.09);
+  border-style: solid;
+  box-shadow: 0 26px 50px -40px rgba(11, 14, 19, 0.55);
+  padding-top: clamp(2.4rem, 3vw, 2.9rem);
+}
+
+.testimonios__chip {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.3rem 0.55rem;
+  border-radius: var(--r-pill);
+  border: 1px solid rgba(199, 162, 76, 0.5);
+  background: rgba(199, 162, 76, 0.12);
+  font-family: var(--font-display);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+}
+
+.testimonios__tarjeta--ejemplo .testimonios__cita p {
+  font-size: clamp(0.98rem, 1.25vw, 1.08rem);
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+.testimonios__tarjeta--ejemplo .testimonios__avatar {
+  border: 1px solid var(--line-strong);
+  background: var(--mist);
+  color: var(--steel);
+}
+
+.testimonios__tarjeta--ejemplo .testimonios__nombre {
+  color: var(--ink);
+}
+
+.testimonios__tarjeta--ejemplo .testimonios__meta {
+  color: var(--steel);
+}
+
+/* ==========================================================================
+   IMPRESIÓN · Exportación de la landing completa (PDF / captura larga)
+   ==========================================================================*/
+
+@media print {
+  html,
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .site-header,
+  .promo-bar,
+  .wa-float,
+  .scroll-progress,
+  .skip-link,
+  .hero__scroll {
+    display: none !important;
+  }
+
+  .hero,
+  .remolque--sangre,
+  .cierre {
+    min-height: auto !important;
+    padding-block: 2.5rem !important;
+  }
+
+  .section,
+  .hero,
+  .cierre {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .reveal,
+  .stagger,
+  .stagger > * {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}

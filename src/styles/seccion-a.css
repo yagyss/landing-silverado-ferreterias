@@ -1,0 +1,696 @@
+/* ============================================================================
+   SECCIÓN A · Problema, solución, beneficios y remolque
+   Se carga después de tokens.css y base.css. Todas las clases van prefijadas
+   con .problema-, .solucion-, .beneficios- o .remolque- para evitar colisiones
+   con las demás hojas del proyecto.
+   ==========================================================================*/
+
+/* ============================================================================
+   02 · PROBLEMA
+   ==========================================================================*/
+.problema-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--gap);
+  margin: 0;
+  padding: 0;
+}
+
+.problema-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding: clamp(1.35rem, 2.4vw, 1.9rem);
+  overflow: hidden;
+}
+
+/* Filo dorado que aparece al pasar el cursor */
+.problema-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 2px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform var(--dur) var(--ease-out);
+}
+
+.problema-card:hover::before {
+  transform: scaleX(1);
+}
+
+.problema-card__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.15rem;
+}
+
+.problema-card__icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  color: var(--gold-deep);
+  background: rgba(199, 162, 76, 0.1);
+  border: 1px solid rgba(199, 162, 76, 0.28);
+  border-radius: var(--r-sm);
+  transition: background-color var(--dur) var(--ease-out), color var(--dur) var(--ease-out);
+}
+
+.problema-card:hover .problema-card__icon {
+  color: var(--gold);
+  background: rgba(199, 162, 76, 0.16);
+}
+
+.problema-card__num {
+  font-family: var(--font-display);
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--steel-light);
+  font-variant-numeric: tabular-nums;
+  padding-top: 0.3rem;
+}
+
+.problema-card h3 {
+  font-size: clamp(1.05rem, 1.5vw, 1.18rem);
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.problema-card p {
+  font-size: var(--fs-small);
+  line-height: 1.6;
+  color: var(--steel);
+  max-width: 34ch;
+}
+
+/* Cierre editorial */
+.problema-cierre {
+  display: grid;
+  gap: 1rem;
+  margin-top: clamp(2rem, 4vw, 3rem);
+  padding: clamp(1.6rem, 3vw, 2.6rem);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 var(--r-md) var(--r-md) 0;
+  box-shadow: var(--shadow-xs);
+}
+
+.problema-cierre__body {
+  display: grid;
+  gap: 0.9rem;
+  max-width: 64ch;
+}
+
+.problema-cierre__body h3 {
+  font-size: clamp(1.4rem, 2.7vw, 2.1rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+@media (min-width: 760px) {
+  .problema-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1080px) {
+  .problema-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .problema-card {
+    min-height: 250px;
+  }
+}
+
+/* ============================================================================
+   03 · SOLUCIÓN
+   ==========================================================================*/
+.solucion-layout {
+  display: grid;
+  gap: clamp(2.25rem, 5vw, 4rem);
+  align-items: center;
+}
+
+.solucion-figura {
+  display: grid;
+  gap: 0.85rem;
+  margin: 0;
+  min-width: 0;
+}
+
+/* Escenario claro: la foto (fondo blanco puro) se integra con multiply */
+.solucion-stage {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(1.4rem, 3vw, 2.6rem) clamp(0.75rem, 2.4vw, 1.9rem) clamp(0.2rem, 1vw, 0.6rem);
+  background: radial-gradient(115% 95% at 50% 6%, var(--paper) 0%, var(--mist) 60%, var(--mist-2) 100%);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+}
+
+.solucion-stage__tag {
+  position: absolute;
+  top: clamp(0.9rem, 2vw, 1.35rem);
+  left: clamp(0.9rem, 2vw, 1.35rem);
+  z-index: 1;
+  background: var(--paper);
+}
+
+.solucion-stage__img {
+  width: 100%;
+  height: auto;
+  mix-blend-mode: multiply;
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+
+.solucion-stage:hover .solucion-stage__img {
+  transform: scale(1.015);
+}
+
+.solucion-caption {
+  margin: 0;
+  padding-inline: 0.15rem;
+  font-size: var(--fs-micro);
+  line-height: 1.6;
+  color: var(--steel);
+  max-width: 56ch;
+}
+
+.solucion-contenido {
+  display: grid;
+  gap: 1.1rem;
+  align-content: start;
+  min-width: 0;
+}
+
+.solucion-lista {
+  display: grid;
+  margin: 0;
+  padding: 0;
+}
+
+.solucion-item {
+  display: grid;
+  grid-template-columns: 2.2rem minmax(0, 1fr);
+  gap: 1rem;
+  padding: 1.02rem 0;
+  border-top: 1px solid var(--line);
+}
+
+.solucion-item:last-child {
+  padding-bottom: 0;
+}
+
+.solucion-item__index {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 1.6;
+  color: var(--gold-deep);
+  font-variant-numeric: tabular-nums;
+}
+
+.solucion-item__body h3 {
+  font-size: clamp(1.08rem, 1.5vw, 1.24rem);
+  letter-spacing: -0.008em;
+  margin-bottom: 0.28rem;
+  color: var(--ink);
+}
+
+.solucion-item__body p {
+  margin: 0;
+  font-size: var(--fs-small);
+  line-height: 1.6;
+  color: var(--steel);
+  max-width: 46ch;
+}
+
+/* Ficha técnica (contenedor pendiente de hidratación) */
+.solucion-ficha {
+  margin-top: clamp(2.75rem, 5vw, 4.5rem);
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  background: var(--mist);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+}
+
+.solucion-ficha__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.25rem;
+  margin-bottom: 0.6rem;
+}
+
+.solucion-ficha__head h3 {
+  font-size: clamp(1.15rem, 1.8vw, 1.5rem);
+  letter-spacing: -0.012em;
+  color: var(--ink);
+}
+
+.solucion-specs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  margin: 0;
+  padding: 0;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  overflow: hidden;
+}
+
+/* La estructura interna (.spec) es el componente compartido de showcase.css;
+   aquí solo se ajusta la densidad y el aspecto del marcador provisional. */
+.solucion-specs .spec {
+  padding: 0.95rem 0.9rem;
+}
+
+.solucion-specs:not(.is-hidratado) .spec__value {
+  color: var(--steel);
+  font-style: italic;
+}
+
+.solucion-ficha .disclaimer {
+  margin-top: 1.15rem;
+  max-width: 92ch;
+  color: var(--ink-soft);
+}
+
+.remolque-nota .disclaimer {
+  color: var(--ink-soft);
+}
+
+@media (min-width: 1080px) {
+  .solucion-layout {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: clamp(2.5rem, 4.5vw, 4.5rem);
+  }
+
+  .solucion-specs {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .solucion-specs .spec {
+    padding: 1.1rem clamp(1rem, 1.6vw, 1.4rem);
+  }
+}
+
+/* ============================================================================
+   04 · BENEFICIOS (fondo grafito)
+   ==========================================================================*/
+.beneficios {
+  overflow: hidden;
+  background: radial-gradient(72% 58% at 88% -8%, rgba(199, 162, 76, 0.1), rgba(199, 162, 76, 0) 60%),
+    var(--graphite-900);
+}
+
+.beneficios .section-header {
+  margin-bottom: clamp(2.25rem, 4.5vw, 3.5rem);
+}
+
+.beneficios-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--gap);
+  margin: 0;
+  padding: 0;
+}
+
+.beneficios-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding: clamp(1.4rem, 2.4vw, 2rem);
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.015));
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: var(--r-md);
+  transition: transform var(--dur) var(--ease-out), border-color var(--dur) var(--ease-out),
+    box-shadow var(--dur) var(--ease-out);
+}
+
+.beneficios-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(199, 162, 76, 0.42);
+  box-shadow: 0 26px 50px -30px rgba(0, 0, 0, 0.8);
+}
+
+.beneficios-card__num {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.45rem, 2vw, 1.7rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: var(--gold);
+  font-variant-numeric: tabular-nums;
+}
+
+.beneficios-card__num::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.beneficios-card h3 {
+  font-size: clamp(0.92rem, 1.2vw, 1.02rem);
+  letter-spacing: 0.11em;
+  line-height: 1.4;
+  color: var(--paper);
+  max-width: 24ch;
+}
+
+.beneficios-card p {
+  margin: 0;
+  font-size: var(--fs-small);
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.74);
+  max-width: 36ch;
+}
+
+/* Imagen amplia 16:9 con overlay y caption */
+.beneficios-media {
+  position: relative;
+  margin: clamp(2.25rem, 4.5vw, 3.5rem) 0 0;
+  overflow: hidden;
+  background: var(--graphite-800);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+.beneficios-media img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: center;
+}
+
+.beneficios-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(7, 9, 13, 0) 42%, rgba(7, 9, 13, 0.78) 100%);
+  pointer-events: none;
+}
+
+.beneficios-media__caption {
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 1;
+  display: grid;
+  gap: 0.35rem;
+  padding: clamp(1.1rem, 2.6vw, 2.1rem);
+}
+
+.beneficios-media__label {
+  font-family: var(--font-display);
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-bright);
+}
+
+.beneficios-media__caption p {
+  margin: 0;
+  font-size: clamp(0.95rem, 1.4vw, 1.15rem);
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.94);
+  max-width: 54ch;
+}
+
+.beneficios-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;
+  margin-top: clamp(2rem, 4vw, 3rem);
+  padding-top: clamp(1.5rem, 3vw, 2rem);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.beneficios-cta__note {
+  margin: 0;
+  font-size: var(--fs-small);
+  line-height: 1.6;
+  color: var(--steel-light);
+  max-width: 48ch;
+}
+
+@media (min-width: 760px) {
+  .beneficios-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* La quinta tarjeta cierra la rejilla sin dejar un hueco huérfano */
+  .beneficios-grid > :last-child {
+    grid-column: span 2;
+    background: linear-gradient(120deg, rgba(199, 162, 76, 0.09), rgba(255, 255, 255, 0.015));
+    border-color: rgba(199, 162, 76, 0.24);
+  }
+
+  .beneficios-cta {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .beneficios-cta .btn {
+    flex: none;
+  }
+}
+
+@media (min-width: 1080px) {
+  .beneficios-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .beneficios-card {
+    min-height: 218px;
+  }
+}
+
+/* ============================================================================
+   05 · REMOLQUE
+   ==========================================================================*/
+.remolque-layout {
+  display: grid;
+  gap: clamp(2.25rem, 4.5vw, 3.5rem);
+  align-items: start;
+}
+
+.remolque-poster {
+  width: 100%;
+  max-width: 460px;
+  margin: 0 auto;
+  overflow: hidden;
+  background: var(--mist);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+.remolque-poster img {
+  width: 100%;
+  height: auto;
+  max-height: 640px;
+  object-fit: cover;
+  object-position: center 43%;
+}
+
+.remolque-contenido {
+  display: grid;
+  gap: 1.1rem;
+  align-content: start;
+  min-width: 0;
+}
+
+.remolque-intro {
+  margin: 0;
+  font-size: var(--fs-body);
+  line-height: 1.62;
+  color: var(--ink-soft);
+  max-width: 54ch;
+}
+
+.remolque-lista {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+}
+
+.remolque-item {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  gap: 1rem;
+  align-items: start;
+  padding: 0.82rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.remolque-item__icon {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--gold-deep);
+  background: rgba(199, 162, 76, 0.1);
+  border: 1px solid rgba(199, 162, 76, 0.28);
+  border-radius: var(--r-sm);
+}
+
+.remolque-item__body {
+  display: grid;
+  gap: 0.15rem;
+  padding-top: 0.35rem;
+  min-width: 0;
+}
+
+.remolque-item h3 {
+  font-size: 1rem;
+  letter-spacing: -0.005em;
+  line-height: 1.3;
+  color: var(--ink);
+}
+
+.remolque-item p {
+  margin: 0;
+  font-size: var(--fs-micro);
+  line-height: 1.5;
+  color: var(--steel);
+}
+
+.remolque-fotos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--gap);
+  margin-top: 0.3rem;
+}
+
+.remolque-foto {
+  margin: 0;
+  overflow: hidden;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-xs);
+  transition: transform var(--dur) var(--ease-out), box-shadow var(--dur) var(--ease-out);
+}
+
+.remolque-foto:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.remolque-foto img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 2 / 1;
+  object-fit: cover;
+}
+
+.remolque-foto figcaption {
+  padding: 0.7rem 0.85rem 0.85rem;
+  font-size: var(--fs-micro);
+  line-height: 1.5;
+  color: var(--steel);
+}
+
+/* Descargo obligatorio · borde izquierdo dorado */
+.remolque-nota {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 1rem;
+  margin-top: clamp(2.25rem, 4.5vw, 3.5rem);
+  padding: clamp(1.15rem, 2.4vw, 1.6rem) clamp(1.25rem, 2.6vw, 1.9rem);
+  background: var(--mist);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 var(--r-md) var(--r-md) 0;
+}
+
+.remolque-nota__icon {
+  color: var(--gold-deep);
+  padding-top: 0.1rem;
+}
+
+.remolque-nota__body {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.remolque-nota__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.remolque-nota .disclaimer {
+  max-width: 88ch;
+}
+
+.remolque-cta {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: clamp(1.75rem, 3.5vw, 2.5rem);
+}
+
+@media (min-width: 760px) {
+  .remolque-contenido {
+    gap: 1.25rem;
+  }
+}
+
+@media (min-width: 1080px) {
+  .remolque-layout {
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+    gap: clamp(2.5rem, 4.5vw, 4.5rem);
+  }
+
+  .remolque-poster {
+    max-width: none;
+    margin: 0;
+  }
+}
+
+/* ============================================================================
+   Movimiento reducido
+   ==========================================================================*/
+@media (prefers-reduced-motion: reduce) {
+  .problema-card:hover,
+  .beneficios-card:hover,
+  .remolque-foto:hover {
+    transform: none;
+  }
+
+  .solucion-stage:hover .solucion-stage__img {
+    transform: none;
+  }
+
+  .problema-card::before {
+    transition: none;
+  }
+}

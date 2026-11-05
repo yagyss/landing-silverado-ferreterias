@@ -1,0 +1,183 @@
+<section class="section section--mist cotiza" id="cotizacion">
+  <div class="cotiza__bg" aria-hidden="true"></div>
+  <div class="container">
+    <div class="cotiza__grid">
+      <div class="cotiza__intro reveal">
+        <p class="eyebrow">El último paso</p>
+        <h2 class="cotiza__titulo">
+          Tu negocio está listo para seguir creciendo.<br />
+          <span class="cotiza__titulo-accent">Cotiza tu Silverado</span>
+        </h2>
+        <p class="lead">
+          Déjanos tus datos y un asesor se pondrá en contacto contigo para brindarte información sobre
+          disponibilidad, versiones y opciones de compra.
+        </p>
+
+        <ul class="cotiza__bullets">
+          <li>
+            <span class="cotiza__bullet-icon" aria-hidden="true">
+              <svg viewBox="0 0 20 20" fill="none"><path d="m4 10.5 4 4 8-9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            </span>
+            <span><strong>Cotización sin costo</strong> y sin compromiso de compra.</span>
+          </li>
+          <li>
+            <span class="cotiza__bullet-icon" aria-hidden="true">
+              <svg viewBox="0 0 20 20" fill="none"><path d="m4 10.5 4 4 8-9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            </span>
+            <span>Te ayudamos a elegir la <strong>versión adecuada</strong> para tu operación.</span>
+          </li>
+          <li>
+            <span class="cotiza__bullet-icon" aria-hidden="true">
+              <svg viewBox="0 0 20 20" fill="none"><path d="m4 10.5 4 4 8-9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            </span>
+            <span>Un asesor revisa <strong>disponibilidad y opciones de compra</strong> contigo.</span>
+          </li>
+        </ul>
+
+        <div class="cotiza__alt">
+          <p class="cotiza__alt-text">¿Prefieres resolverlo por mensaje?</p>
+          <a class="btn btn--ghost" href="#cotizacion" data-wa-form data-cta="form-whatsapp">
+            <span>Escríbenos por WhatsApp</span>
+          </a>
+        </div>
+
+        <p class="disclaimer cotiza__nota" data-form-privacidad-nota></p>
+      </div>
+
+      <div class="cotiza__card reveal reveal--right" style="--reveal-delay: 90ms">
+        <div class="cotiza__card-head">
+          <span class="tag tag--gold">Cotización</span>
+          <h3 class="cotiza__card-title">Solicita tu Silverado</h3>
+          <p class="cotiza__card-sub">Campos marcados con <span aria-hidden="true">*</span> son obligatorios.</p>
+          <p class="cotiza__card-sub" id="form-ayuda">Puedes llenarlo más rápido con el autocompletado de tu navegador.</p>
+        </div>
+
+        <form class="form" data-form-cotizacion novalidate autocomplete="on" aria-describedby="form-ayuda">
+          <div class="form__row">
+            <div class="form__field">
+              <label class="form__label" for="campo-nombre">Nombre completo <span aria-hidden="true">*</span></label>
+              <input
+                class="form__input"
+                id="campo-nombre"
+                name="nombre"
+                type="text"
+                autocomplete="name"
+                autocapitalize="words"
+                spellcheck="false"
+                enterkeyhint="next"
+                placeholder="Ej. Juan Pérez"
+                required
+              />
+              <p class="form__error" data-error-for="nombre"></p>
+            </div>
+
+            <div class="form__field">
+              <label class="form__label" for="campo-celular">Celular <span aria-hidden="true">*</span></label>
+              <input
+                class="form__input"
+                id="campo-celular"
+                name="whatsapp"
+                type="tel"
+                inputmode="tel"
+                autocomplete="tel"
+                enterkeyhint="next"
+                placeholder="55 1234 5678"
+                required
+              />
+              <p class="form__hint">10 dígitos. Te contactaremos por WhatsApp.</p>
+              <p class="form__error" data-error-for="whatsapp"></p>
+            </div>
+          </div>
+
+          <div class="form__row">
+            <div class="form__field">
+              <label class="form__label" for="campo-correo">Correo electrónico <span aria-hidden="true">*</span></label>
+              <input
+                class="form__input"
+                id="campo-correo"
+                name="correo"
+                type="email"
+                autocomplete="email"
+                autocapitalize="off"
+                spellcheck="false"
+                enterkeyhint="next"
+                placeholder="nombre@correo.com"
+                required
+              />
+              <p class="form__error" data-error-for="correo"></p>
+            </div>
+
+            <div class="form__field">
+              <label class="form__label" for="campo-plan">Plan <span aria-hidden="true">*</span></label>
+              <div class="form__select-wrap">
+                <select class="form__input form__select" id="campo-plan" name="plan" autocomplete="off" required>
+                  <option value="" selected disabled>Selecciona una opción</option>
+                </select>
+                <svg class="form__chevron" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 6 4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg>
+              </div>
+              <p class="form__error" data-error-for="plan"></p>
+            </div>
+          </div>
+
+          <div class="form__field">
+            <label class="form__label" for="campo-mensaje">Mensaje</label>
+            <textarea
+              class="form__input form__textarea"
+              id="campo-mensaje"
+              name="mensaje"
+              autocomplete="off"
+              rows="4"
+              maxlength="600"
+              placeholder="Cuéntanos qué necesitas: tipo de mercancía, número de sucursales o dudas sobre la camioneta."
+            ></textarea>
+            <p class="form__error" data-error-for="mensaje"></p>
+          </div>
+
+          <div class="form__trap" aria-hidden="true">
+            <label for="campo-empresa-web">No llenar este campo</label>
+            <input id="campo-empresa-web" name="honeypot" type="text" tabindex="-1" autocomplete="off" />
+          </div>
+
+          <input type="hidden" name="iniciadoEn" data-form-inicio value="0" />
+
+          <div class="form__check">
+            <input class="form__checkbox" id="campo-privacidad" name="privacidad" type="checkbox" required />
+            <label class="form__check-label" for="campo-privacidad">
+              Acepto el
+              <button class="form__link" type="button" data-open-privacidad>aviso de privacidad</button>
+              y el tratamiento de mis datos para ser contactado.
+            </label>
+          </div>
+          <p class="form__error" data-error-for="privacidad"></p>
+
+          <button class="btn btn--primary btn--lg btn--block form__submit" type="submit" data-form-submit>
+            <span>Solicitar mi cotización</span>
+            <svg class="btn__icon" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </button>
+
+          <p class="form__status" data-form-status role="status" aria-live="polite"></p>
+          <p class="form__legal">
+            Tus datos se usan únicamente para dar seguimiento a tu solicitud de cotización.
+          </p>
+        </form>
+
+        <div class="form__success" data-form-success hidden>
+          <span class="form__success-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="m5 12.5 4.5 4.5L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          </span>
+          <h3 class="form__success-title" data-success-titulo>Solicitud registrada</h3>
+          <p class="form__success-text" data-success-mensaje></p>
+          <p class="form__success-folio" data-success-folio-wrap>
+            Folio: <strong data-success-folio></strong>
+          </p>
+          <div class="form__success-actions">
+            <a class="btn btn--primary" href="#cotizacion" data-wa-form data-cta="success-whatsapp">Continuar por WhatsApp</a>
+            <button class="btn btn--ghost" type="button" data-success-reset>Enviar otra solicitud</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

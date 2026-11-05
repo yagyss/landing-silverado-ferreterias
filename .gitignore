@@ -1,0 +1,30 @@
+# Dependencias
+node_modules/
+
+# Salida de compilación (Netlify la genera en cada deploy)
+dist/
+
+# Datos personales de prospectos: NUNCA al repositorio
+data/prospectos.jsonl
+data/*.jsonl
+
+# Fotografía original pesada (se conserva en local, no se publica)
+assets/vehiculos/silverado/_originales/
+
+# Artefactos de revisión
+qa-*.png
+qa-*.jpg
+demo-*.html
+*-dom.html
+preview-*
+debug-*.png
+debug-*.html
+apps-script-check.js
+bundle-check.js
+
+# Sistema
+.DS_Store
+Thumbs.db
+*.log
+.env
+.env.*

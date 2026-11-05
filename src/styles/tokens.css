@@ -1,0 +1,118 @@
+/* ============================================================================
+   TOKENS DE DISEÑO · Sistema visual de la landing
+   Paleta: blanco, gris grafito, azul oscuro + dorado Chevrolet.
+   Tipografía: Chevy Sans (oficial) con respaldo local Bahnschrift / Segoe UI.
+   ==========================================================================*/
+
+/* --- Tipografía de marca -------------------------------------------------
+   Se intenta primero la fuente oficial del fabricante; si el archivo no está
+   disponible (revisión sin conexión o bloqueo del CDN), el navegador cae a
+   Bahnschrift (DIN instalada en Windows) manteniendo el carácter industrial.
+   Para uso 100% offline: coloca los .woff2 en /assets/fuentes/ y las reglas
+   locales ya están preparadas.                                           */
+@font-face {
+  font-family: "Chevy Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../assets/fuentes/ChevySans-Medium.woff2") format("woff2"),
+    url("https://brands.gm-cdn.com/gbds/chevrolet-2023/fonts/ChevySans-Medium.woff2") format("woff2"),
+    local("Bahnschrift"), local("DIN Alternate"), local("Segoe UI Semibold");
+}
+@font-face {
+  font-family: "Chevy Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../assets/fuentes/ChevySans-Bold.woff2") format("woff2"),
+    url("https://brands.gm-cdn.com/gbds/chevrolet-2023/fonts/ChevySans-Bold.woff2") format("woff2"),
+    local("Bahnschrift SemiBold"), local("Bahnschrift"), local("Segoe UI Bold");
+}
+
+:root {
+  /* ---------- Color ---------- */
+  --paper: #ffffff;
+  --mist: #f4f5f7;
+  --mist-2: #eceef1;
+  --line: #e2e5ea;
+  --line-strong: #cdd2da;
+
+  --graphite-950: #07090d;
+  --graphite-900: #0b0e13;
+  --graphite-800: #12161d;
+  --graphite-700: #1a1f28;
+  --graphite-600: #262c37;
+
+  --azul-900: #0a1a2f;
+  --azul-800: #0e2a4d;
+  --azul-700: #14406f;
+
+  --ink: #101317;
+  --ink-soft: #3a4048;
+  --steel: #6c7480;
+  --steel-light: #9aa1ab;
+  --snow: #f7f8fa;
+
+  --gold: #c7a24c;
+  --gold-bright: #e3c47c;
+  --gold-deep: #9c7c31;
+
+  --success: #1f7a55;
+  --danger: #b3261e;
+
+  /* ---------- Tipografía ---------- */
+  --font-display: "Chevy Sans", "Bahnschrift", "DIN Alternate", "Arial Narrow", system-ui, sans-serif;
+  --font-text: "Chevy Sans", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+
+  --fs-display: clamp(2.75rem, 7.2vw, 5.5rem);
+  --fs-h1: clamp(2.25rem, 5.2vw, 4rem);
+  --fs-h2: clamp(1.9rem, 3.9vw, 3.1rem);
+  --fs-h3: clamp(1.35rem, 2.2vw, 1.85rem);
+  --fs-h4: clamp(1.1rem, 1.5vw, 1.3rem);
+  --fs-lead: clamp(1.02rem, 1.5vw, 1.22rem);
+  --fs-body: clamp(0.97rem, 1.15vw, 1.05rem);
+  --fs-small: 0.875rem;
+  --fs-micro: 0.75rem;
+
+  /* ---------- Espaciado y rejilla ---------- */
+  --container: 1280px;
+  --container-narrow: 940px;
+  --gutter: clamp(1.15rem, 4vw, 2.75rem);
+  --section-y: clamp(4.5rem, 9vw, 8.5rem);
+  --section-y-sm: clamp(3rem, 6vw, 5rem);
+  --gap: clamp(1rem, 2vw, 1.75rem);
+  --header-h: 68px;
+
+  /* ---------- Radios ---------- */
+  --r-xs: 4px;
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 22px;
+  --r-xl: 32px;
+  --r-pill: 999px;
+
+  /* ---------- Sombras (suaves y por capas) ---------- */
+  --shadow-xs: 0 1px 2px rgba(11, 14, 19, 0.05);
+  --shadow-sm: 0 2px 8px rgba(11, 14, 19, 0.06), 0 1px 2px rgba(11, 14, 19, 0.04);
+  --shadow-md: 0 12px 28px -12px rgba(11, 14, 19, 0.18), 0 2px 6px rgba(11, 14, 19, 0.05);
+  --shadow-lg: 0 32px 60px -28px rgba(11, 14, 19, 0.28), 0 8px 18px -12px rgba(11, 14, 19, 0.12);
+  --shadow-float: 0 18px 40px -18px rgba(11, 14, 19, 0.35);
+  --shadow-gold: 0 18px 38px -18px rgba(199, 162, 76, 0.65);
+
+  /* ---------- Movimiento ---------- */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring: cubic-bezier(0.34, 1.4, 0.5, 1);
+  --dur-fast: 160ms;
+  --dur: 320ms;
+  --dur-slow: 640ms;
+  --dur-cine: 1100ms;
+
+  /* ---------- Capas ---------- */
+  --z-base: 1;
+  --z-sticky: 100;
+  --z-header: 200;
+  --z-float: 300;
+  --z-modal: 400;
+  --z-toast: 500;
+}

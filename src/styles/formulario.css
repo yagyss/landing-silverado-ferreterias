@@ -1,0 +1,508 @@
+/* ============================================================================
+   FORMULARIO DE COTIZACIÓN (sección 11)
+   ==========================================================================*/
+
+.cotiza {
+  position: relative;
+  overflow: hidden;
+  scroll-margin-top: calc(var(--header-h) + 12px);
+}
+
+.cotiza__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle at 82% 18%, rgba(199, 162, 76, 0.16), transparent 46%),
+    linear-gradient(to right, rgba(11, 14, 19, 0.035) 1px, transparent 1px);
+  background-size: auto, 84px 100%;
+  mask-image: linear-gradient(to bottom, transparent, #000 22%, #000 78%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 22%, #000 78%, transparent);
+}
+
+.cotiza__grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: clamp(2rem, 4vw, 3.5rem);
+  align-items: start;
+}
+
+/* ------------------------------------------------------------------- Columna */
+.cotiza__intro {
+  display: grid;
+  gap: 1.15rem;
+  align-content: start;
+}
+
+.cotiza__titulo {
+  font-size: clamp(1.85rem, 4.2vw, 3rem);
+  line-height: 1.03;
+  letter-spacing: -0.028em;
+  text-transform: uppercase;
+}
+
+.cotiza__titulo-accent {
+  background: linear-gradient(96deg, var(--gold-deep), var(--gold) 55%, var(--gold-bright));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.cotiza__bullets {
+  display: grid;
+  gap: 0.8rem;
+  font-size: var(--fs-small);
+  color: var(--ink-soft);
+}
+
+.cotiza__bullets li {
+  display: grid;
+  grid-template-columns: 26px 1fr;
+  gap: 0.7rem;
+  align-items: start;
+}
+
+.cotiza__bullet-icon {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(199, 162, 76, 0.14);
+  border: 1px solid rgba(199, 162, 76, 0.4);
+  color: var(--gold-deep);
+}
+
+.cotiza__bullet-icon svg {
+  width: 15px;
+  height: 15px;
+}
+
+.cotiza__bullets strong {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.cotiza__alt {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.1rem;
+  border-radius: var(--r-md);
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--line);
+}
+
+.cotiza__alt-text {
+  font-size: var(--fs-small);
+  color: var(--ink-soft);
+  margin-right: auto;
+}
+
+.cotiza__nota {
+  max-width: 46ch;
+}
+
+/* ---------------------------------------------------------------------- Card */
+.cotiza__card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-lg);
+  padding: clamp(1.35rem, 3vw, 2.25rem);
+  display: grid;
+  gap: 1.4rem;
+}
+
+.cotiza__card-head {
+  display: grid;
+  gap: 0.5rem;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.cotiza__card-title {
+  font-size: clamp(1.25rem, 2.4vw, 1.5rem);
+  letter-spacing: -0.015em;
+}
+
+.cotiza__card-sub {
+  font-size: var(--fs-micro);
+  color: var(--steel);
+}
+
+/* ------------------------------------------------------------------- Campos */
+.form {
+  display: grid;
+  gap: 1.05rem;
+}
+
+.form__row {
+  display: grid;
+  gap: 1.05rem;
+}
+
+.form__field {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.form__label {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.form__label span[aria-hidden="true"] {
+  color: var(--danger);
+}
+
+.form__optional {
+  font-family: var(--font-text);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  color: var(--steel-light);
+}
+
+.form__input {
+  width: 100%;
+  min-height: 50px;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  background: #fdfdfe;
+  color: var(--ink);
+  font-size: 0.95rem;
+  transition: border-color var(--dur) var(--ease-out), box-shadow var(--dur) var(--ease-out),
+    background-color var(--dur) var(--ease-out);
+}
+
+.form__input::placeholder {
+  color: #a7aeb8;
+}
+
+.form__input:hover {
+  border-color: #b9c0ca;
+}
+
+.form__input:focus {
+  outline: none;
+  border-color: var(--gold);
+  background: var(--paper);
+  box-shadow: 0 0 0 3px rgba(199, 162, 76, 0.18);
+}
+
+.form__field.has-error .form__input,
+.form__fieldset.has-error .form__input {
+  border-color: var(--danger);
+  background: #fffaf9;
+}
+
+.form__select-wrap {
+  position: relative;
+}
+
+.form__select {
+  appearance: none;
+  padding-right: 2.4rem;
+  cursor: pointer;
+}
+
+.form__select:invalid,
+.form__select option[value=""] {
+  color: #a7aeb8;
+}
+
+.form__chevron {
+  position: absolute;
+  right: 0.85rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  color: var(--steel);
+  pointer-events: none;
+}
+
+.form__hint {
+  font-size: 0.68rem;
+  color: var(--steel-light);
+}
+
+.form__error {
+  min-height: 0;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--danger);
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity var(--dur) var(--ease-out), max-height var(--dur) var(--ease-out);
+}
+
+.form__error.is-visible {
+  opacity: 1;
+  max-height: 4rem;
+}
+
+/* Radios tipo "chip" */
+.form__fieldset {
+  display: grid;
+  gap: 0.55rem;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.form__fieldset .form__label {
+  padding: 0;
+  margin-bottom: 0.15rem;
+}
+
+.form__choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.form__choice {
+  position: relative;
+  display: inline-flex;
+  cursor: pointer;
+}
+
+.form__choice-input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.form__choice-label {
+  display: inline-flex;
+  align-items: center;
+  min-height: 42px;
+  padding: 0.5rem 0.85rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  background: #fdfdfe;
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  transition: border-color var(--dur) var(--ease-out), background-color var(--dur) var(--ease-out),
+    color var(--dur) var(--ease-out), box-shadow var(--dur) var(--ease-out);
+}
+
+.form__choice:hover .form__choice-label {
+  border-color: var(--gold);
+  color: var(--ink);
+}
+
+.form__choice-input:checked + .form__choice-label {
+  border-color: var(--graphite-900);
+  background: var(--graphite-900);
+  color: var(--paper);
+  box-shadow: 0 6px 16px -10px rgba(11, 14, 19, 0.6);
+}
+
+.form__choice-input:focus-visible + .form__choice-label {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+.form__fieldset.has-error .form__choice-label {
+  border-color: rgba(179, 38, 30, 0.5);
+}
+
+/* Checkbox de privacidad */
+.form__check {
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  align-items: start;
+  gap: 0.65rem;
+  padding: 0.85rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--mist);
+  transition: border-color var(--dur) var(--ease-out);
+}
+
+.form__check.has-error {
+  border-color: var(--danger);
+  background: #fffaf9;
+}
+
+.form__checkbox {
+  width: 18px;
+  height: 18px;
+  margin-top: 0.15rem;
+  accent-color: var(--graphite-900);
+  cursor: pointer;
+}
+
+.form__check-label {
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+.form__link {
+  padding: 0;
+  font-size: inherit;
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--gold);
+  text-underline-offset: 2px;
+}
+
+.form__trap {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.form__submit {
+  margin-top: 0.35rem;
+}
+
+.form__status {
+  font-size: 0.8rem;
+  line-height: 1.5;
+  padding: 0.75rem 0.9rem;
+  border-radius: var(--r-sm);
+  display: none;
+}
+
+.form__status.is-visible {
+  display: block;
+}
+
+.form__status[data-tipo="error"] {
+  background: #fdf2f1;
+  border: 1px solid rgba(179, 38, 30, 0.3);
+  color: #8d1d17;
+}
+
+.form__status[data-tipo="info"] {
+  background: var(--mist);
+  border: 1px solid var(--line);
+  color: var(--ink-soft);
+}
+
+.form__legal {
+  font-size: 0.68rem;
+  line-height: 1.55;
+  color: var(--steel-light);
+  text-align: center;
+}
+
+.form[aria-busy="true"] .form__input {
+  opacity: 0.7;
+}
+
+/* ------------------------------------------------------------------- Éxito */
+.form__success {
+  display: grid;
+  gap: 0.85rem;
+  justify-items: center;
+  text-align: center;
+  padding: clamp(1rem, 3vw, 2rem) 0.5rem;
+}
+
+.form__success[hidden] {
+  display: none;
+}
+
+.form__success-icon {
+  display: grid;
+  place-items: center;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: rgba(31, 122, 85, 0.1);
+  border: 1px solid rgba(31, 122, 85, 0.35);
+  color: var(--success);
+}
+
+.form__success-icon svg {
+  width: 30px;
+  height: 30px;
+}
+
+.form__success-title {
+  font-size: 1.3rem;
+}
+
+.form__success-text {
+  font-size: var(--fs-small);
+  color: var(--ink-soft);
+  max-width: 44ch;
+}
+
+.form__success-folio {
+  font-size: var(--fs-small);
+  color: var(--steel);
+  padding: 0.4rem 0.85rem;
+  background: var(--mist);
+  border-radius: var(--r-pill);
+}
+
+.form__success-folio strong {
+  font-family: var(--font-display);
+  letter-spacing: 0.06em;
+  color: var(--ink);
+}
+
+.form__success-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  justify-content: center;
+  margin-top: 0.4rem;
+}
+
+/* --------------------------------------------------------------- Responsivo */
+@media (min-width: 620px) {
+  .form__row {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}
+
+@media (min-width: 1080px) {
+  .cotiza__grid {
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+    gap: clamp(2.5rem, 5vw, 4.5rem);
+  }
+
+  .cotiza__intro {
+    position: sticky;
+    top: calc(var(--header-h) + 28px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .form__error,
+  .form__input {
+    transition: none;
+  }
+}
+
+/* ------------------------------------------------- Ajustes de integración */
+.cotiza__card-head {
+  justify-items: start;
+}
+
+.cotiza__card-head .tag {
+  justify-self: start;
+  width: fit-content;
+}

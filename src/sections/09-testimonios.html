@@ -1,0 +1,66 @@
+<section id="testimonios" class="section section--paper testimonios" aria-labelledby="testimonios-titulo">
+  <div class="container">
+    <div class="section-header testimonios__cabecera">
+      <p class="eyebrow">Confianza</p>
+      <h2 id="testimonios-titulo" data-testimonios-titulo>Empresarios que saben lo que significa mover un negocio</h2>
+      <p class="lead">
+        Esta sección reúne la experiencia de empresarios ferreteros. Cada testimonio se publica
+        únicamente con autorización por escrito.
+      </p>
+    </div>
+
+    <div
+      class="testimonios__carrusel reveal"
+      data-testimonios
+      role="region"
+      aria-roledescription="carrusel"
+      aria-label="Testimonios de empresarios ferreteros"
+    >
+      <div
+        class="testimonios__viewport"
+        data-testimonios-viewport
+        tabindex="0"
+        aria-label="Carrusel de testimonios. Usa las flechas izquierda y derecha para navegar."
+      >
+        <ul class="testimonios__pista" data-testimonios-pista>
+          <li class="testimonios__slide">
+            <noscript>
+              <p class="testimonios__noscript">
+                Activa JavaScript para ver los testimonios. Actualmente este espacio está pendiente
+                de autorización.
+              </p>
+            </noscript>
+          </li>
+        </ul>
+      </div>
+
+      <div class="testimonios__controles">
+        <button class="testimonios__nav" type="button" data-testimonios-prev aria-label="Testimonio anterior" disabled>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+            <path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+
+        <div class="testimonios__puntos" data-testimonios-puntos></div>
+
+        <button class="testimonios__nav" type="button" data-testimonios-next aria-label="Testimonio siguiente" disabled>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+            <path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+      </div>
+
+      <p class="sr-only" aria-live="polite" data-testimonios-estado></p>
+    </div>
+
+    <p class="disclaimer testimonios__nota" data-testimonios-nota></p>
+
+    <div class="testimonios__resenas" data-testimonios-resenas>
+      <noscript>
+        <p class="testimonios__noscript">
+          Las reseñas verificadas del distribuidor se integrarán cuando estén disponibles.
+        </p>
+      </noscript>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,98 @@
+/* ============================================================================
+   COMPONENTES COMPARTIDOS DEL SHOWCASE
+   (estilos reutilizables por las secciones: ficha técnica, figuras con sombra)
+   ==========================================================================*/
+
+/* ------------------------------------------------------------- Ficha técnica */
+[data-specs-silverado] {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1px;
+  margin: 0;
+  padding: 0;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  overflow: hidden;
+}
+
+[data-specs-silverado]:empty {
+  display: none;
+}
+
+[data-specs-silverado] .spec {
+  display: grid;
+  gap: 0.2rem;
+  padding: 1rem 1.1rem;
+  background: var(--paper);
+}
+
+[data-specs-silverado] .spec__label {
+  margin: 0;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--steel);
+}
+
+[data-specs-silverado] .spec__value {
+  margin: 0;
+  display: grid;
+  gap: 0.1rem;
+}
+
+[data-specs-silverado] .spec__value strong {
+  font-family: var(--font-display);
+  font-size: 1.02rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+[data-specs-silverado] .spec__nota {
+  font-size: 0.68rem;
+  line-height: 1.4;
+  color: var(--steel-light);
+}
+
+/* ------------------------------------------------- Figura con sombra suave */
+.figure-stack {
+  position: relative;
+  margin: 0;
+}
+
+.figure-stack img {
+  width: 100%;
+  height: auto;
+}
+
+.figure-stack--stage {
+  background: radial-gradient(ellipse 66% 76% at 50% 60%, #ffffff 0%, #fafbfc 56%, #f1f3f6 100%);
+  border-radius: var(--r-lg);
+  border: 1px solid rgba(11, 14, 19, 0.05);
+  box-shadow: 0 40px 76px -54px rgba(11, 14, 19, 0.45);
+  overflow: hidden;
+}
+
+/* Las tomas de catálogo tienen fondo blanco: se integran con multiply */
+.figure-stack--stage img {
+  mix-blend-mode: multiply;
+}
+
+.figure-stack__caption {
+  margin-top: 0.75rem;
+  font-size: 0.7rem;
+  line-height: 1.5;
+  color: var(--steel-light);
+}
+
+[data-specs-silverado] .spec__estado {
+  font-family: var(--font-display);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  opacity: 0.85;
+}

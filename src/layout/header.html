@@ -1,0 +1,61 @@
+<header class="site-header" id="site-header" data-header>
+  <div class="promo-bar" data-promo-bar aria-label="Promoción vigente"></div>
+
+  <div class="site-header__inner container">
+    <a class="brand" href="#inicio" aria-label="Chevrolet Silverado, ir al inicio">
+      <span class="brand__mark" data-brand-mark>
+        <span class="brand__wordmark" data-brand-wordmark aria-hidden="true">CHEVROLET</span>
+      </span>
+      <span class="brand__divider" aria-hidden="true"></span>
+      <span class="brand__model">SILVERADO</span>
+    </a>
+
+    <nav class="nav" aria-label="Navegación principal">
+      <a class="nav__link" href="#vehiculo">La camioneta</a>
+      <a class="nav__link" href="#beneficios">Beneficios</a>
+      <a class="nav__link" href="#remolque">Carga y remolque</a>
+      <a class="nav__link" href="#comparativa">Comparativa</a>
+      <a class="nav__link" href="#preguntas">Preguntas</a>
+    </nav>
+
+    <div class="site-header__actions">
+      <a class="btn btn--primary btn--sm header-cta" href="#cotizacion" data-cta="header">
+        <span>Solicitar cotización</span>
+        <svg class="btn__icon" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </a>
+
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label="Abrir menú"
+        data-menu-toggle
+      >
+        <span class="menu-toggle__bars" aria-hidden="true"><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="mobile-menu" id="mobile-menu" data-mobile-menu hidden>
+    <nav class="mobile-menu__nav" aria-label="Navegación móvil">
+      <a class="mobile-menu__link" href="#vehiculo" data-menu-link>La camioneta</a>
+      <a class="mobile-menu__link" href="#problema" data-menu-link>El problema</a>
+      <a class="mobile-menu__link" href="#beneficios" data-menu-link>Beneficios</a>
+      <a class="mobile-menu__link" href="#remolque" data-menu-link>Carga y remolque</a>
+      <a class="mobile-menu__link" href="#transformacion" data-menu-link>Antes y después</a>
+      <a class="mobile-menu__link" href="#oferta" data-menu-link>Promoción</a>
+      <a class="mobile-menu__link" href="#comparativa" data-menu-link>Comparativa</a>
+      <a class="mobile-menu__link" href="#preguntas" data-menu-link>Preguntas</a>
+    </nav>
+    <a class="btn btn--primary btn--block mobile-menu__cta" href="#cotizacion" data-menu-link data-cta="menu">
+      <span>Solicitar cotización</span>
+      <svg class="btn__icon" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </a>
+    <p class="mobile-menu__foot">Camioneta de trabajo para ferreterías de la Ciudad de México.</p>
+  </div>
+</header>

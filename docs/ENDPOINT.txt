@@ -1,0 +1,8 @@
+Endpoint de recepción de leads (Google Apps Script)
+
+URL /exec: https://script.google.com/macros/s/AKfycbwj3hEDWUEcZa94a1ZThZHK4lWbJW7CsmGysRbXUayBrJcTV-MNWNHSd6BcZCZigBua/exec
+
+Proxy configurado en netlify.toml:
+  /api/cotizacion  →  esta URL (status 200)
+
+Si cambias de implementación, actualiza ambos archivos.

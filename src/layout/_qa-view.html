@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>QA · captura por sección</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: #ffffff;
+        overflow: hidden;
+      }
+      iframe {
+        display: block;
+        width: 100vw;
+        height: 100vh;
+        border: 0;
+        transform-origin: 0 0;
+      }
+    </style>
+  </head>
+  <body>
+    <!--
+      Arnés SOLO para revisión visual local. Carga la landing en un iframe y la
+      desplaza a la sección indicada. No forma parte del sitio publicado.
+
+      Parámetros:
+        id  sección destino (ej. problema)
+        w   ancho CSS exacto del viewport a simular (ej. 390)
+        h   alto CSS exacto (ej. 844)
+
+      Chrome headless impone un ancho mínimo de ventana (~504 px), así que para
+      revisar móvil se fija el iframe a 390 px y luego se recorta la captura.
+    -->
+    <iframe id="marco" title="Landing"></iframe>
+    <script>
+      const parametros = new URLSearchParams(window.location.search);
+      const id = parametros.get("id");
+      const ancho = Number(parametros.get("w")) || 0;
+      const alto = Number(parametros.get("h")) || 0;
+      const marco = document.getElementById("marco");
+
+      if (ancho) marco.style.width = `${ancho}px`;
+      if (alto) marco.style.height = `${alto}px`;
+
+      marco.addEventListener("load", () => {
+        const ventana = marco.contentWindow;
+        const documento = marco.contentDocument;
+        if (!ventana || !documento) return;
+
+        // Modo página completa: neutraliza las alturas basadas en el viewport
+        if (parametros.get('full')) {
+          const completo = documento.createElement('style');
+          completo.id = 'modo-pagina-completa';
+          completo.textContent = `
+            .hero, .cierre, .remolque--sangre { min-height: auto !important; }
+            .hero { padding-top: 90px !important; }
+          `;
+          documento.head.appendChild(completo);
+        }
+
+        // Para la captura: evita que las imágenes diferidas queden sin cargar
+        const cargarTodo = () => {
+          documento.querySelectorAll('img').forEach((img) => {
+            img.loading = 'eager';
+            if (img.decode) img.decode().catch(() => {});
+          });
+        };
+
+        const ir = () => {
+          cargarTodo();
+          const destino = id ? documento.getElementById(id) : null;
+          const y = destino ? destino.getBoundingClientRect().top + ventana.scrollY - 78 : 0;
+          ventana.scrollTo({ top: Math.max(0, y), behavior: "instant" });
+
+          // Congela el estado final de las animaciones para una captura fiable.
+          if (!documento.getElementById("qa-congelar")) {
+            const estilo = documento.createElement("style");
+            estilo.id = "qa-congelar";
+            estilo.textContent = `
+              .reveal, .stagger, .stagger > * {
+                opacity: 1 !important;
+                transform: none !important;
+                filter: none !important;
+                transition: none !important;
+              }
+              .showcase__stack { transform: none !important; }
+              .showcase__img { transition: none !important; }
+            `;
+            documento.head.appendChild(estilo);
+          }
+        };
+
+        setTimeout(ir, 260);
+        setTimeout(ir, 900);
+      });
+
+      marco.src = "/";
+    </script>
+  </body>
+</html>
