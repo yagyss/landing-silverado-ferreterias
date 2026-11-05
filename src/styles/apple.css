@@ -1314,3 +1314,26 @@ html {
 .hero__swatches {
   gap: 0.55rem !important;
 }
+
+/* Llamada a la acción: resaltado del formulario al llegar */
+.cotiza__card.is-destacada {
+  animation: cotiza-pulso 1300ms var(--ease-out) both;
+}
+
+@keyframes cotiza-pulso {
+  0% {
+    box-shadow: 0 0 0 0 rgba(199, 162, 76, 0.55);
+  }
+  60% {
+    box-shadow: 0 0 0 16px rgba(199, 162, 76, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(199, 162, 76, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cotiza__card.is-destacada {
+    animation: none;
+  }
+}

@@ -12,6 +12,7 @@
 import { initAnalitica } from "./analytics.js";
 import { initExpressForm } from "./express.js";
 import { initFormulario } from "./formulario.js";
+import { initCtaFormulario } from "./cta-formulario.js";
 import { initLocalNav } from "./localnav.js";
 import { initActiveNav, initParallax, initReveals, initScrollUI } from "./motion.js";
 import { initNavegacion } from "./nav.js";
@@ -55,6 +56,7 @@ function iniciar() {
     ["nav-activo", initActiveNav],
     ["showcase", initShowcase],
     ["formulario", initFormulario],
+    ["cta-formulario", initCtaFormulario],
     ["formulario-express", initExpressForm],
   ];
 
