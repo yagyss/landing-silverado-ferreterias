@@ -45,7 +45,9 @@ const CONFIG = {
   ENVIAR_CORREO_LEAD: true,
   ENVIAR_CORREO_ADMIN: true,
 
-  MINUTOS_DEDUPE: 10,
+  /** 0 = sin restricciones: la misma persona puede registrarse varias veces.
+   *  Si algún día quieres bloquear repetidos, pon 10 (minutos). */
+  MINUTOS_DEDUPE: 0,
   /** Si alguien repite el envío con el mismo celular, avisa al administrador
    *  (no se envía correo al prospecto ni se duplica la fila). */
   AVISAR_DUPLICADOS: true,
@@ -242,8 +244,8 @@ function doPost(evento) {
     const filas = hoja.getLastRow();
     const ahora = new Date();
 
-    // Deduplicación por celular (columna telefono)
-    if (filas > 1 && mapa.telefono) {
+    // Deduplicación por celular (solo si CONFIG.MINUTOS_DEDUPE > 0)
+    if (CONFIG.MINUTOS_DEDUPE > 0 && filas > 1 && mapa.telefono) {
       const desde = Math.max(2, filas - 199);
       const valores = hoja.getRange(desde, mapa.telefono, filas - desde + 1, 1).getValues();
       const fechas = mapa.fecha
