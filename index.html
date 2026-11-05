@@ -10214,35 +10214,51 @@ function initFormulario() {
     }
 
     try {
-      // Abierto como archivo se envía directo al Apps Script (sin proxy).
+      // Netlify usa su proxy (/api/cotizacion). En archivo local o GitHub Pages
+      // se envía directo al Apps Script.
+      const host = window.location.hostname;
+      const sinProxy =
+        window.location.protocol === "file:" || host.endsWith("github.io") || host === "";
       const esArchivo = window.location.protocol === "file:";
       const destino =
-        esArchivo && SITE.formulario.endpointRemoto
+        sinProxy && SITE.formulario.endpointRemoto
           ? SITE.formulario.endpointRemoto
           : SITE.formulario.endpoint;
 
-      const respuesta = await fetch(destino, {
-        method: "POST",
-        // Con file:// el navegador no permite leer la respuesta (CORS),
-        // así que se usa una petición simple y se informa con honestidad.
-        mode: esArchivo ? "no-cors" : "cors",
-        headers: {
-          "content-type": esArchivo ? "text/plain;charset=utf-8" : "application/json",
-        },
-        body: JSON.stringify({
-          nombre: limpio.nombre,
-          whatsapp: normalizarTelefono(limpio.whatsapp),
-          correo: limpio.correo,
-          plan: limpio.plan,
-          mensaje: limpio.mensaje,
-          privacidad: true,
-          honeypot: limpio.honeypot,
-          iniciadoEn: comenzado,
-          pagina: window.location.href,
-          referrer: document.referrer,
-          origen: leerUtm(),
-        }),
+      const cuerpoEnvio = JSON.stringify({
+        nombre: limpio.nombre,
+        whatsapp: normalizarTelefono(limpio.whatsapp),
+        correo: limpio.correo,
+        plan: limpio.plan,
+        mensaje: limpio.mensaje,
+        privacidad: true,
+        honeypot: limpio.honeypot,
+        iniciadoEn: comenzado,
+        pagina: window.location.href,
+        referrer: document.referrer,
+        origen: leerUtm(),
       });
+
+      const enviar = (modo) =>
+        fetch(destino, {
+          method: "POST",
+          mode: modo,
+          headers: {
+            "content-type": modo === "no-cors" ? "text/plain;charset=utf-8" : "application/json",
+          },
+          body: cuerpoEnvio,
+        });
+
+      // Apps Script no siempre expone CORS: se intenta leer la respuesta y, si
+      // el navegador la bloquea, se reenvía igual y se informa con honestidad.
+      let respuesta;
+      try {
+        respuesta = await enviar("cors");
+      } catch (errorCors) {
+        respuesta = await enviar("no-cors");
+      }
+
+
 
       let cuerpo = {};
       if (respuesta.type !== "opaque") {
@@ -10255,7 +10271,7 @@ function initFormulario() {
 
       // Envío desde archivo: la petición salió, pero el navegador no puede
       // leer la respuesta. Se confirma sólo lo que sí sabemos.
-      if (respuesta.type === "opaque") {
+      if (respuesta.type === "opaque" || respuesta.status === 0) {
         if (exito) {
           exito.hidden = false;
           exito.querySelector("[data-success-titulo]").textContent = "Solicitud enviada";
