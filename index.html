@@ -7289,6 +7289,18 @@ a[href="#cotizacion"].localnav__cta {
   font-weight: 700;
 }
 
+/* Nota bajo el mensaje del formulario */
+.cotiza__alt {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.cotiza__alt-nota {
+  margin: 0;
+  font-size: 0.86rem;
+  color: var(--text-soft, #7c8798);
+}
+
   </style>
   </head>
   <body>
@@ -8261,10 +8273,13 @@ a[href="#cotizacion"].localnav__cta {
         </ul>
 
         <div class="cotiza__alt">
-          <p class="cotiza__alt-text">¿Prefieres resolverlo por mensaje?</p>
-          <a class="btn btn--ghost" href="#cotizacion" data-wa-form data-cta="form-whatsapp">
-            <span>Escríbenos por WhatsApp</span>
-          </a>
+          <p class="cotiza__alt-text">
+            <strong>Llena tus datos</strong> y un asesor te contacta con disponibilidad,
+            versiones y opciones de compra.
+          </p>
+          <p class="cotiza__alt-nota">
+            Cotización sin costo y sin compromiso. Recibes tu folio al enviar.
+          </p>
         </div>
 
         <p class="disclaimer cotiza__nota" data-form-privacidad-nota></p>
@@ -8399,8 +8414,7 @@ a[href="#cotizacion"].localnav__cta {
             Folio: <strong data-success-folio></strong>
           </p>
           <div class="form__success-actions">
-            <a class="btn btn--primary" href="#cotizacion" data-wa-form data-cta="success-whatsapp">Continuar por WhatsApp</a>
-            <button class="btn btn--ghost" type="button" data-success-reset>Enviar otra solicitud</button>
+            <button class="btn btn--primary" type="button" data-success-reset>Enviar otra solicitud</button>
           </div>
         </div>
       </div>
@@ -8686,7 +8700,7 @@ const SITE = {
 
   /* ------------------------------------------------------------------ CONTACTO */
   contacto: {
-    telefono: "", // ej. "+52 55 1234 5678"
+    telefono: "+52 55 8051 6601",
     correo: "", // ej. "ventas@distribuidor.com.mx"
     distribuidor: "", // Nombre del distribuidor autorizado
     horario: "Lunes a sábado, 9:00 a 19:00 h",
@@ -8976,7 +8990,7 @@ const SITE = {
       exitoCuerpo:
         "Recibimos tus datos y quedaron registrados con folio {folio}. Un asesor se pondrá en contacto contigo para brindarte información sobre disponibilidad, versiones y opciones de compra.",
       errorGeneral:
-        "No pudimos registrar tu solicitud en este momento. Intenta de nuevo o escríbenos por WhatsApp; tus datos no se perdieron.",
+        "No pudimos registrar tu solicitud en este momento. Intenta de nuevo en unos segundos; tus datos no se perdieron.",
       duplicado:
         "Ya tenemos una solicitud reciente con este número de WhatsApp. Un asesor te contactará; si necesitas algo urgente, escríbenos por WhatsApp.",
     },
@@ -8987,10 +9001,10 @@ const SITE = {
     activo: true,
     /** Formato internacional sin signos: 521 + 10 dígitos para México.
      *  Si queda vacío, el botón permanece visible pero lleva al formulario. */
-    numero: "",
+    numero: "5215580516601",
     mensaje:
       "Hola, me interesa cotizar la Chevrolet Silverado para mi ferretería. ¿Me pueden dar informes?",
-    etiqueta: "Cotiza por WhatsApp",
+    etiqueta: "Solicitar cotización",
   },
 
   /* ---------------------------------------------------------------- ANALÍTICA */

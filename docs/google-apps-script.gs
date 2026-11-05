@@ -38,8 +38,8 @@ const CONFIG = {
   RESPONDER_A: "ventas@tudominio.mx",
 
   DISTRIBUIDOR: "Distribuidor autorizado Chevrolet",
-  TELEFONO: "+52 55 0000 0000",
-  WHATSAPP: "5215500000000",
+  TELEFONO: "+52 55 8051 6601",
+  WHATSAPP: "5215580516601",
   HORARIO: "Lunes a sábado, 9:00 a 19:00 h",
 
   ENVIAR_CORREO_LEAD: true,

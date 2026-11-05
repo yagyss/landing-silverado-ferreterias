@@ -116,7 +116,7 @@ export const SITE = {
 
   /* ------------------------------------------------------------------ CONTACTO */
   contacto: {
-    telefono: "", // ej. "+52 55 1234 5678"
+    telefono: "+52 55 8051 6601",
     correo: "", // ej. "ventas@distribuidor.com.mx"
     distribuidor: "", // Nombre del distribuidor autorizado
     horario: "Lunes a sábado, 9:00 a 19:00 h",
@@ -406,7 +406,7 @@ export const SITE = {
       exitoCuerpo:
         "Recibimos tus datos y quedaron registrados con folio {folio}. Un asesor se pondrá en contacto contigo para brindarte información sobre disponibilidad, versiones y opciones de compra.",
       errorGeneral:
-        "No pudimos registrar tu solicitud en este momento. Intenta de nuevo o escríbenos por WhatsApp; tus datos no se perdieron.",
+        "No pudimos registrar tu solicitud en este momento. Intenta de nuevo en unos segundos; tus datos no se perdieron.",
       duplicado:
         "Ya tenemos una solicitud reciente con este número de WhatsApp. Un asesor te contactará; si necesitas algo urgente, escríbenos por WhatsApp.",
     },
@@ -417,10 +417,10 @@ export const SITE = {
     activo: true,
     /** Formato internacional sin signos: 521 + 10 dígitos para México.
      *  Si queda vacío, el botón permanece visible pero lleva al formulario. */
-    numero: "",
+    numero: "5215580516601",
     mensaje:
       "Hola, me interesa cotizar la Chevrolet Silverado para mi ferretería. ¿Me pueden dar informes?",
-    etiqueta: "Cotiza por WhatsApp",
+    etiqueta: "Solicitar cotización",
   },
 
   /* ---------------------------------------------------------------- ANALÍTICA */

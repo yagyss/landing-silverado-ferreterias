@@ -1346,3 +1346,15 @@ a[href="#cotizacion"].localnav__cta {
   letter-spacing: 0.01em;
   font-weight: 700;
 }
+
+/* Nota bajo el mensaje del formulario */
+.cotiza__alt {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.cotiza__alt-nota {
+  margin: 0;
+  font-size: 0.86rem;
+  color: var(--text-soft, #7c8798);
+}
